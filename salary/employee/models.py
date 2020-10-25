@@ -1,19 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Mangement(models.Model):
     mangemen_name = models.CharField(max_length=150)
 
     def __str__(self):
         return self.mangemen_name
-
-class Employee(models.Model):
-    emp_name = models.CharField(max_length=250)
-    mangment = models.ForeignKey(Mangement,on_delete=models.CASCADE)
-    user =  models.OneToOneField(User,on_delete=models.CASCADE,null=False)
+class EmportEmployee(models.Model):
+    EmpID = models.IntegerField()
+    EmpName = models.CharField(max_length =150)
+    MangementId = models.IntegerField()
 
     def __str__(self):
-        return self.emp_name
+        return self.EmpName
+        
+class Employee(models.Model):
+    mangment = models.ForeignKey(Mangement,on_delete=models.CASCADE)
+    user =  models.OneToOneField(User,on_delete=models.CASCADE,null=False)
+    moblie_no =models.CharField(max_length=15,null=False,blank=False,default=None)
+    send_text = models.BooleanField(default=True)
+    send_voice = models.BooleanField(default=True)
+    send_email = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
 
 class Salary(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=False)

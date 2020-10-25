@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import EmportEmployee
 
 def home(request):
     return render(request,'home.html')
@@ -46,3 +47,15 @@ def logoutuser(request):
 
 def dashboard(request):
     return render(request,'dash.html')
+
+def emport(request):
+    if request.method == 'POST':
+        password = 'password'
+        employees = EmportEmployee.objects.all()
+        for employee in employees:
+            username = str(employee.EmpID)
+            user = User.objects.create_user(username,password=password,first_name = employee.EmpName)
+            user.save()
+        return render(request,'emport.html',{'Msg': 'Emport end'})
+    else:
+        return render(request,'emport.html',{'Msg': 'Emport '})

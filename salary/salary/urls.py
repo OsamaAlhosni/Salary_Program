@@ -13,5 +13,6 @@ urlpatterns = [
     #Salary
     path('', views.home,name='home'),
     path('dash/', views.dashboard,name='dashboard'),
+    path('emport/', views.emport,name='emport'),
 
 ]
