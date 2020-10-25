@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from employee import views
+from emport_salary import views as salaryviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,5 +15,6 @@ urlpatterns = [
     path('', views.home,name='home'),
     path('dash/', views.dashboard,name='dashboard'),
     path('emport/', views.emport,name='emport'),
+    path('salary/', salaryviews.start_emport,name='start_emport'),
 
 ]
