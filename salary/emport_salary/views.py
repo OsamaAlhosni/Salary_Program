@@ -1,31 +1,34 @@
 from django.shortcuts import render
 import sqlite3
 from sqlite3 import Error
+from employee.models import Salary
+
 
 def create_conn(database):
-    conn = null
+    conn = None
+
     try:
         conn = sqlite3.connect(database)
     except Error as e:
         print(e)
     return conn
 
+
 def select_salary(conn):
     cur = conn.cursor()
-    cur.execute('select * from Salary')
+    cur.execute('INSERT INTO employee_salary (user_id, sMonth, sYear,base_salary,total_salary,total_Diesc,net_salary,overtime,health_care,solfa1,solfa2) SELECT EmpID, sMonth, sYear,base_salary,total_salary,Total_Disc,net_salary,overtime,health_care,solfa1,solfa2  FROM Salary_8_2020 WHERE EmpID IN  (SELECT EmpID FROM Employee) ')
     rows = cur.fetchall()
     for row in rows:
+
         print(row)
+
 
 def start_emport(request):
     if request.method == "POST":
-        database = 'D:\Projects\salary_pro\salary\db.sqlite3'
+        database = 'D:\Projects\Salary_Program\salary\db.sqlite3'
         conn = create_conn(database)
         with conn:
             select_salary(conn)
-        return render(request,'emport_salary',{'Msg': 'Start Emport'})
+        return render(request, 'emport_salary.html', {'Msg': 'Start Emport'})
     else:
-        return render(request,'emport_salary.html',{'Msg': 'emport salary'})
-
-
-
+        return render(request, 'emport_salary.html', {'Msg': 'emport salary'})
