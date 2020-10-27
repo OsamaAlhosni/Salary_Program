@@ -1,171 +1,174 @@
- {% extends 'master.html' %} 
- {% load static %}
+{% extends 'master.html' %}
+{% load static %}
 
- 
- {% block mainblock %}
- 
- <body style="font-family:  'Cairo', sans-serif;">
- <div id="page-content">
-    <!-- Dashboard Header -->
-    <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
-    <div class="content-header content-header-media">
-        <div class="header-section">
-            <div class="row">
-                <!-- Main Title (hidden on small devices for the statistics to fit) -->
-                <div class="col-md-4 col-lg-12 hidden-xs hidden-sm text-right">
-                    <h1>مرحبا <strong class = "text-primary">{{ user.get_short_name }}</strong><br><small >كيف حالك اليوم</small></h1>
-                </div>
-                <!-- END Main Title -->
-            </div>
-        </div>
-        <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
-        <img src="{% static 'img/placeholders/headers/dashboard_header.jpg' %}" alt="header image" class="animation-pulseSlow">
-    </div>
-    <!-- END Dashboard Header -->
 
-    <!-- Mini Top Stats Row -->
-    <div class="row">
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="/health_care" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
-                        <i class="gi gi-heart_empty"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                         <strong>الرعاية الصحية</strong>
-                        <small>تفاصيل الرعاية الصحية</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="/loan" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
-                        <i class="gi gi-bank"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                         <strong>السلف والقروض</strong>
-                        <small>كشف حركة السلف والقروض</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="/salary_view" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                        <i class="gi gi-usd"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                         <strong>مراجعة المرتب</strong><br>
-                        <small>تفاصيل مرتباتك</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="/pro" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
-                        <i class="fa fa-file-text"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        فتح <strong>بيانتك الوظيفية</strong><br>
-                        <small>البيانات الأساسية</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-    </div>
-    <!-- END Mini Top Stats Row -->
+{% block mainblock %}
 
-    <!-- Widgets Row -->
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Your Plan Widget -->
-            <div class="widget">
-                <div class="widget-extra themed-background-dark">
-                    <div class="widget-options">
-                        <div class="btn-group btn-group-xs">
-                            <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Edit Widget"><i class="fa fa-pencil"></i></a>
-                            <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Quick Settings"><i class="fa fa-cog"></i></a>
-                        </div>
+<body style="font-family:  'Cairo', sans-serif;">
+    <div id="page-content">
+        <!-- Dashboard Header -->
+        <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
+        <div class="content-header content-header-media">
+            <div class="header-section">
+                <div class="row">
+                    <!-- Main Title (hidden on small devices for the statistics to fit) -->
+                    <div class="col-md-4 col-lg-12 hidden-xs hidden-sm text-right">
+                        <h1>مرحبا <strong class="text-primary">{{ user.get_short_name }}</strong><br><small>كيف حالك
+                                اليوم</small></h1>
                     </div>
-                    <h3 class="widget-content-light">
-                         <strong>رسومات بيانية عن مرتباتك الشهرية</strong>
-                        <small><a href="page_ready_pricing_tables.html"><strong>توضيحية</strong></a></small>
-                    </h3>
-                </div>
-                <div class="widget-extra-full">
-                    <div class="row text-center">
-                        <div class="col-xs-6 col-lg-3">
-                            <h3>
-                                <strong>35</strong> <small>دينار</small><br>
-                                <small><i class="fa fa-folder-open-o"></i> صافي المرتب</small>
-                            </h3>
-                        </div>
-                        <div class="col-xs-6 col-lg-3">
-                            <h3>
-                                <strong>25</strong> <small>دينار</small><br>
-                                <small><i class="fa fa-hdd-o"></i> اجمالي السلف</small>
-                            </h3>
-                        </div>
-                        <div class="col-xs-6 col-lg-3">
-                            <h3>
-                                <strong>65</strong> <small>دينار</small><br>
-                                <small><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية </small>
-                            </h3>
-                        </div>
-                        <div class="col-xs-6 col-lg-3">
-                            <h3>
-                                <strong>10</strong> <small>دينار</small><br>
-                                <small><i class="fa fa-envelope-o"></i> اجمالي العمل الاضافي</small>
-                            </h3>
-                        </div>
-                    </div>
+                    <!-- END Main Title -->
                 </div>
             </div>
-            <!-- END Your Plan Widget -->
-            <!-- Charts Widget -->
-            <div class="widget">
-                <div class="widget-advanced widget-advanced-alt">
-                    <!-- Widget Header -->
-                    <div class="widget-header text-center themed-background">
-                        <h3 class="widget-content-light text-right pull-right animation-pullDown">
-                            <strong>اجمالي الدخل</strong> &amp; <strong>الخصميات</strong><br>
-                            <small> لأخر سنة </small>
+            <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
+            <img src="{% static 'img/placeholders/headers/dashboard_header.jpg' %}" alt="header image"
+                class="animation-pulseSlow">
+        </div>
+        <!-- END Dashboard Header -->
+
+        <!-- Mini Top Stats Row -->
+        <div class="row">
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="/health_care" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                            <i class="gi gi-heart_empty"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            <strong>الرعاية الصحية</strong>
+                            <small>تفاصيل الرعاية الصحية</small>
                         </h3>
-                        
-                        {% block scripts %}
-                            
-                        {% endblock scripts %}
-                            
-                        {% block contenet %}
-                            
-                        {% endblock contenet %}
-                            
-                            
-                        <!-- Flot Charts (initialized in js/pages/index.js), for more examples you can check out http://www.flotcharts.org/ -->
-                        <div id="dash-widget-chart" class="chart"></div>
                     </div>
-                    <!-- END Widget Header -->
-                </div>
+                </a>
+                <!-- END Widget -->
             </div>
-            <!-- END Charts Widget -->
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="/loan" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                            <i class="gi gi-bank"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            <strong>السلف والقروض</strong>
+                            <small>كشف حركة السلف والقروض</small>
+                        </h3>
+                    </div>
+                </a>
+                <!-- END Widget -->
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="/salary_view" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                            <i class="gi gi-usd"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            <strong>مراجعة المرتب</strong><br>
+                            <small>تفاصيل مرتباتك</small>
+                        </h3>
+                    </div>
+                </a>
+                <!-- END Widget -->
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <!-- Widget -->
+                <a href="/pro" class="widget widget-hover-effect1">
+                    <div class="widget-simple">
+                        <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                        <h3 class="widget-content text-right animation-pullDown">
+                            فتح <strong>بيانتك الوظيفية</strong><br>
+                            <small>البيانات الأساسية</small>
+                        </h3>
+                    </div>
+                </a>
+                <!-- END Widget -->
+            </div>
         </div>
+        <!-- END Mini Top Stats Row -->
+
+        <!-- Widgets Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Your Plan Widget -->
+                <div class="widget">
+                    <div class="widget-extra themed-background-dark">
+                        <div class="widget-options">
+                            <div class="btn-group btn-group-xs">
+                                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
+                                    title="Edit Widget"><i class="fa fa-pencil"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
+                                    title="Quick Settings"><i class="fa fa-cog"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="widget-content-light">
+                            <strong>رسومات بيانية عن مرتباتك الشهرية</strong>
+                            <small><a href="page_ready_pricing_tables.html"><strong>توضيحية</strong></a></small>
+                        </h3>
+                    </div>
+                    <div class="widget-extra-full">
+                        <div class="row text-center">
+                            <div class="col-xs-6 col-lg-3">
+                                <h3>
+                                    <strong>{{salary.sYear}}</strong> <small>{{user}}</small><br>
+                                    <small><i class="fa fa-folder-open-o"></i> صافي المرتب</small>
+                                </h3>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <h3>
+                                    <strong>25</strong> <small>دينار</small><br>
+                                    <small><i class="fa fa-hdd-o"></i> اجمالي السلف</small>
+                                </h3>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <h3>
+                                    <strong>65</strong> <small>دينار</small><br>
+                                    <small><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية </small>
+                                </h3>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <h3>
+                                    <strong>10</strong> <small>دينار</small><br>
+                                    <small><i class="fa fa-envelope-o"></i> اجمالي العمل الاضافي</small>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Your Plan Widget -->
+                <!-- Charts Widget -->
+                <div class="widget">
+                    <div class="widget-advanced widget-advanced-alt">
+                        <!-- Widget Header -->
+                        <div class="widget-header text-center themed-background">
+                            <h3 class="widget-content-light text-right pull-right animation-pullDown">
+                                <strong>اجمالي الدخل</strong> &amp; <strong>الخصميات</strong><br>
+                                <small> لأخر سنة </small>
+                            </h3>
+
+                            {% block scripts %}
+
+                            {% endblock scripts %}
+
+                            {% block contenet %}
+
+                            {% endblock contenet %}
+
+
+                            <!-- Flot Charts (initialized in js/pages/index.js), for more examples you can check out http://www.flotcharts.org/ -->
+                            <div id="dash-widget-chart" class="chart"></div>
+                        </div>
+                        <!-- END Widget Header -->
+                    </div>
+                </div>
+                <!-- END Charts Widget -->
+            </div>
+        </div>
+        <!-- END Widgets Row -->
     </div>
-    <!-- END Widgets Row -->
-</div>
 </body>
 
- {% endblock mainblock %}
-     
+{% endblock mainblock %}
