@@ -8,13 +8,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Auth
-    path('signup/', views.signupuser,name='signupuser'),
-    path('logout/', views.logoutuser,name='logoutuser'),
-    path('login/', views.loginuser,name='loginuser'),    
-    #Salary
-    path('', views.home,name='home'),
-    path('dash/', views.dashboard,name='dashboard'),
-    path('emport/', views.emport,name='emport'),
-    path('salary/', salaryviews.start_emport,name='start_emport'),
+    path('signup/', views.signupuser, name='signupuser'),
+    path('logout/', views.logoutuser, name='logoutuser'),
+    path('login/', views.loginuser, name='loginuser'),
+    # Salary
+    path('', views.home, name='home'),
+    path('dash/', views.dashboard, name='dashboard'),
+    path('emport/', views.emport, name='emport'),
+    path('profile/', views.profile, name='profile'),
 
 ]

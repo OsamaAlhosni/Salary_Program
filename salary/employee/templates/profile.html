@@ -1,0 +1,170 @@
+{% extends 'master.html' %} {% load static %} {% block mainblock %}
+
+<body style="font-family: 'Cairo', sans-serif">
+    <div id="page-content">
+        <!-- Forms General Header -->
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="gi gi-notes_2"></i>
+                    <p class="text-right" dir="rtl">البيانات الأساسية</p>
+                </h1>
+            </div>
+        </div>
+        <!-- <ul class="breadcrumb breadcrumb-top">
+        <li>Forms</li>
+        <li><a href="">General</a></li>
+    </ul> -->
+        <!-- END Forms General Header -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Content -->
+                    <form action="/dash" method="post" enctype="multipart/form-data"
+                        class="form-horizontal form-bordered" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="col-md-10">
+                                    <span class="help-block text-center" dir="rtl">{{user.first_name}}</span>
+                                    <!-- <input type="text" id="example-text-input" name="example-text-input"
+                                        class="form-control text-right" dir="rtl" placeholder="الإسم واللقب" /> -->
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="help-block text-center" dir="rtl">الإسم واللقب</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <span class="help-block text-center" dir="rtl">{{user.username}}</span>
+                                    </div>
+
+                                    <!-- <input type="text" id="example-text-input" name="example-text-input"
+                                        class="form-control text-right" dir="rtl" placeholder="الرقم الوظيفي" /> -->
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="help-block text-center" dir="rtl">الرقم الوظيفي</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="col-md-10">
+                                    <input type="email" id="example-email-input" name="example-email-input"
+                                        class="form-control text-right" placeholder="البريد الإلكتروني" />
+                                    <script type="text/javascript">
+                                        document.getElementById("example-email-input").setAttribute('value', "{{ user.email }}");
+                                    </script>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="help-block text-center">البريد الإلكتروني</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-8">
+                                    <input type="text" id="example-text-input" name="example-text-input"
+                                        class="form-control text-right" dir="rtl" placeholder="رقم الهاتف" />
+                                    {% if employee %}
+                                    {% for emp in employee %}
+                                    <script type="text/javascript">
+                                        document.getElementById("example-text-input").setAttribute('value', "{{ emp.moblie_no }}");
+                                    </script>
+                                    {% endfor  %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="help-block text-center" dir="rtl">رقم الهاتف</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="col-md-10">
+                                    <input type="password" id="example-password-input" name="example-password-input"
+                                        class="form-control text-right" placeholder="تأكيد المرور" />
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="help-block text-center">تأكيد المرور</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-8">
+                                    <input type="password" id="example-password-input" name="example-password-input"
+                                        class="form-control text-right" placeholder="كلمة المرور" />
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="help-block text-center">كلمة المرور</span>
+                                </div>
+                            </div>
+
+                        </div> -->
+                        <div class="form-group">
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-8">
+                                    <select id="example-select" name="example-select" class="form-control text-right"
+                                        size="1">
+                                        <option value="0">الرجاء إختيار الإدارة التي تتبعها</option>
+                                        {% for mangement in mangemnts %}
+                                        <option value="{{mangement.id}}">{{mangement.mangemen_name}}</option>
+                                        {% endfor %}
+                                        <!-- <option value="2">الإدارة المالية</option>
+                                        <option value="3">الإدارة العامة</option> -->
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="help-block text-center">الإدارة</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 text-right">
+                                <label class="checkbox-inline" for="example-inline-checkbox1">
+                                    <input type="checkbox" id="example-inline-checkbox1" name="example-inline-checkbox1"
+                                        value="option1" />
+                                    رسالة نصية
+                                </label>
+                                <label class="checkbox-inline" for="example-inline-checkbox2">
+                                    <input type="checkbox" id="example-inline-checkbox2" name="example-inline-checkbox2"
+                                        value="option2" />
+                                    رسالة صوتية
+                                </label>
+                                <label class="checkbox-inline" for="example-inline-checkbox3">
+                                    <input type="checkbox" id="example-inline-checkbox3" name="example-inline-checkbox3"
+                                        value="option3" />
+                                    بريد إلكتروني
+                                </label>
+                            </div>
+
+                            <label class="col-md-3 control-label text-right">الخدمات التي ترغب بالإشتراك بها</label>
+                        </div>
+                        <div class="form-group form-actions">
+                            <div class="col-md-6 ">
+                                <button type="reset" class="btn btn-lg btn-warning btn-block">
+                                    <i class="fa fa-repeat"></i> تراجع
+                                </button>
+                            </div>
+                            <div class="col-md-6 ">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block ">
+                                    <i class="fa fa-floppy-o"></i> حفظ التعديلات
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock mainblock %}

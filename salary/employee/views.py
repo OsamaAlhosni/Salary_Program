@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.db.models import Sum
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import EmportEmployee, Salary
+from .models import EmportEmployee, Salary, Employee, Mangement
 
 
 def home(request):
@@ -56,10 +56,29 @@ def logoutuser(request):
 @login_required
 def dashboard(request):
     user = request.user
-    salary = Salary.objects.filter(EmpID=user.username)
-    salary_imp = {'employee': salary}
+    salary = Salary.objects.filter(user=user)
 
-    return render(request, 'dash.html', salary_imp)
+    total_salary = Salary.objects.filter(user=user)
+    total_net_salary = 0
+    total_solfa = 0
+    total_overtime = 0
+    total_healthcare = 0
+    for qs in total_salary:
+        total_net_salary += qs.net_salary
+        total_solfa += qs.solfa1
+        total_overtime += qs.overtime
+        total_healthcare += qs.health_care
+        print(total_net_salary)
+
+    salary = {
+        'total_salary': total_net_salary,
+        'total_solfa': total_solfa,
+        'total_overtime': total_overtime,
+        'total_healthcare': total_healthcare
+
+    }
+    print(salary)
+    return render(request, 'dash.html', salary)
 
 
 def emport(request):
@@ -74,3 +93,14 @@ def emport(request):
         return render(request, 'emport.html', {'Msg': 'Emport end'})
     else:
         return render(request, 'emport.html', {'Msg': 'Emport '})
+
+
+def profile(request):
+    if not request.user.is_authenticated:
+        return redirect('/')
+    else:
+        user = request.user
+        mangemnts = Mangement.objects.all()
+        employee = Employee.objects.filter(user=request.user)
+
+        return render(request, 'profile.html', {'user': user, 'employee': employee, 'mangemnts': mangemnts})

@@ -14,7 +14,9 @@
                     <!-- Main Title (hidden on small devices for the statistics to fit) -->
                     <div class="col-md-4 col-lg-12 hidden-xs hidden-sm text-right">
                         <h1>مرحبا <strong class="text-primary">{{ user.get_short_name }}</strong><br><small>كيف حالك
-                                اليوم</small></h1>
+                                اليوم</small><br><small class="text-danger">{{ user.last_login }}</small><small>
+                                تاريخ
+                                أخر دخول لك كان في </small></h1>
                     </div>
                     <!-- END Main Title -->
                 </div>
@@ -74,7 +76,7 @@
             </div>
             <div class="col-sm-6 col-lg-3">
                 <!-- Widget -->
-                <a href="/pro" class="widget widget-hover-effect1">
+                <a href="/profile" class="widget widget-hover-effect1">
                     <div class="widget-simple">
                         <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
                             <i class="fa fa-file-text"></i>
@@ -111,32 +113,34 @@
                     </div>
                     <div class="widget-extra-full">
                         <div class="row text-center">
+
                             <div class="col-xs-6 col-lg-3">
                                 <h3>
-                                    {% for emp in employee %}
-                                    <strong>{{emp.total_salary}}</strong> <small>{{user}}</small><br>
-                                    <small><i class="fa fa-folder-open-o"></i> صافي المرتب</small>
-                                    {% endfor  %}
-                                </h3>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <h3>
-                                    <strong>25</strong> <small>دينار</small><br>
-                                    <small><i class="fa fa-hdd-o"></i> اجمالي السلف</small>
-                                </h3>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <h3>
-                                    <strong>65</strong> <small>دينار</small><br>
-                                    <small><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية </small>
-                                </h3>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <h3>
-                                    <strong>10</strong> <small>دينار</small><br>
+                                    <strong> {{total_overtime}} </strong> <small>دينار</small><br>
                                     <small><i class="fa fa-envelope-o"></i> اجمالي العمل الاضافي</small>
                                 </h3>
                             </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <h3>
+                                    <strong> {{total_healthcare}} </strong> <small> دينار </small><br>
+                                    <small><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية </small>
+                                </h3>
+                            </div>
+
+                            <div class="col-xs-6 col-lg-3">
+                                <h3>
+                                    <strong> {{total_solfa}} </strong> <small> دينار </small><br>
+                                    <small><i class="fa fa-hdd-o"></i> اجمالي أقساط السلف المخصومة </small>
+                                </h3>
+                            </div>
+
+                            <div class="col-xs-6 col-lg-3">
+                                <h3>
+                                    <strong> {{total_salary}} </strong> <small> دينار </small><br>
+                                    <small><i class="fa fa-folder-open-o"></i> إجمالي صافي المرتبات المصروفة</small>
+                                </h3>
+                            </div>
+
                         </div>
                     </div>
                 </div>
