@@ -113,8 +113,10 @@
                         <div class="row text-center">
                             <div class="col-xs-6 col-lg-3">
                                 <h3>
-                                    <strong>{{salary.sYear}}</strong> <small>{{user}}</small><br>
+                                    {% for emp in employee %}
+                                    <strong>{{emp.total_salary}}</strong> <small>{{user}}</small><br>
                                     <small><i class="fa fa-folder-open-o"></i> صافي المرتب</small>
+                                    {% endfor  %}
                                 </h3>
                             </div>
                             <div class="col-xs-6 col-lg-3">

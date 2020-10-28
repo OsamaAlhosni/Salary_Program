@@ -56,9 +56,10 @@ def logoutuser(request):
 @login_required
 def dashboard(request):
     user = request.user
-    salary = Salary.objects.filter(user=user)
+    salary = Salary.objects.filter(EmpID=user.username)
+    salary_imp = {'employee': salary}
 
-    return render(request, 'dash.html', {'salary': salary, 'user': user})
+    return render(request, 'dash.html', salary_imp)
 
 
 def emport(request):
