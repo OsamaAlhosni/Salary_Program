@@ -11,10 +11,6 @@
                 </h1>
             </div>
         </div>
-        <!-- <ul class="breadcrumb breadcrumb-top">
-        <li>Forms</li>
-        <li><a href="">General</a></li>
-    </ul> -->
         <!-- END Forms General Header -->
 
         <div class="row">
@@ -22,8 +18,8 @@
                 <!-- Basic Form Elements Block -->
                 <div class="block">
                     <!-- Basic Form Elements Content -->
-                    <form action="/dash" method="post" enctype="multipart/form-data"
-                        class="form-horizontal form-bordered" onsubmit="return false;">
+                    <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data"
+                        class="form-horizontal form-bordered" >
                         {% csrf_token %}
                         <div class="form-group">
                             <div class="col-md-6">
@@ -54,10 +50,10 @@
                         <div class="form-group">
                             <div class="col-md-6">
                                 <div class="col-md-10">
-                                    <input type="email" id="example-email-input" name="example-email-input"
+                                    <input type="email" id="email-input" name="email-input"
                                         class="form-control text-right" placeholder="البريد الإلكتروني" />
                                     <script type="text/javascript">
-                                        document.getElementById("example-email-input").setAttribute('value', "{{ user.email }}");
+                                        document.getElementById("email-input").setAttribute('value', "{{ user.email }}");
                                     </script>
                                 </div>
                                 <div class="col-md-2">
@@ -66,12 +62,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="col-md-8">
-                                    <input type="text" id="example-text-input" name="example-text-input"
-                                        class="form-control text-right" dir="rtl" placeholder="رقم الهاتف" />
+                                    <input type="text" id="mobile-no" name="mobile-no"
+                                        class="form-control text-right" dir="rtl" placeholder="09X-XXX-XXXX" />
                                     {% if employee %}
                                     {% for emp in employee %}
                                     <script type="text/javascript">
-                                        document.getElementById("example-text-input").setAttribute('value', "{{ emp.moblie_no }}");
+                                        document.getElementById("mobile-no").setAttribute('value', "{{ emp.moblie_no }}");
                                     </script>
                                     {% endfor  %}
                                     {% endif %}
@@ -81,42 +77,25 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-group">
-                            <div class="col-md-6">
-                                <div class="col-md-10">
-                                    <input type="password" id="example-password-input" name="example-password-input"
-                                        class="form-control text-right" placeholder="تأكيد المرور" />
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="help-block text-center">تأكيد المرور</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="col-md-8">
-                                    <input type="password" id="example-password-input" name="example-password-input"
-                                        class="form-control text-right" placeholder="كلمة المرور" />
-                                </div>
-                                <div class="col-md-4">
-                                    <span class="help-block text-center">كلمة المرور</span>
-                                </div>
-                            </div>
-
-                        </div> -->
                         <div class="form-group">
                             <div class="col-md-6">
 
                             </div>
                             <div class="col-md-6">
                                 <div class="col-md-8">
-                                    <select id="example-select" name="example-select" class="form-control text-right"
+                                    <select id="mangement" name="mangement" class="form-control text-right"
                                         size="1">
                                         <option value="0">الرجاء إختيار الإدارة التي تتبعها</option>
                                         {% for mangement in mangemnts %}
-                                        <option value="{{mangement.id}}">{{mangement.mangemen_name}}</option>
+                                        {% if employee %}
+                                        {% for emp in employee %}
                                         {% endfor %}
-                                        <!-- <option value="2">الإدارة المالية</option>
-                                        <option value="3">الإدارة العامة</option> -->
+                                        {% endif %}
+                                        <option value="{{mangement.id}}"{% if emp.mangment_id == mangement %} selected {% endif %}>{{mangement.mangemen_name}}</option>
+                                        {% endfor  %}
+
                                     </select>
+
                                 </div>
                                 <div class="col-md-4">
                                     <span class="help-block text-center">الإدارة</span>
@@ -126,19 +105,19 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-9 text-right">
-                                <label class="checkbox-inline" for="example-inline-checkbox1">
-                                    <input type="checkbox" id="example-inline-checkbox1" name="example-inline-checkbox1"
-                                        value="option1" />
+                                <label class="checkbox-inline" for="sms-checkbox">
+                                    <input type="checkbox" id="sms-checkbox" name="sms-checkbox"
+                                        value="sms" />
                                     رسالة نصية
                                 </label>
-                                <label class="checkbox-inline" for="example-inline-checkbox2">
-                                    <input type="checkbox" id="example-inline-checkbox2" name="example-inline-checkbox2"
-                                        value="option2" />
+                                <label class="checkbox-inline" for="voice-checkbox">
+                                    <input type="checkbox" id="voice-checkbox" name="voice-checkbox"
+                                        value="voice" />
                                     رسالة صوتية
                                 </label>
-                                <label class="checkbox-inline" for="example-inline-checkbox3">
-                                    <input type="checkbox" id="example-inline-checkbox3" name="example-inline-checkbox3"
-                                        value="option3" />
+                                <label class="checkbox-inline" for="email-checkbox">
+                                    <input type="checkbox" id="email-checkbox" name="email-checkbox"
+                                        value="email" />
                                     بريد إلكتروني
                                 </label>
                             </div>
