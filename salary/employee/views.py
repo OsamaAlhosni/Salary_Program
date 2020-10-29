@@ -53,32 +53,34 @@ def logoutuser(request):
         return redirect('home')
 
 
-@login_required
 def dashboard(request):
-    user = request.user
-    salary = Salary.objects.filter(user=user)
+    if not request.user.is_authenticated:
+        return redirect('/')
+    else:
+        user = request.user
+        salary = Salary.objects.filter(user=user)
 
-    total_salary = Salary.objects.filter(user=user)
-    total_net_salary = 0
-    total_solfa = 0
-    total_overtime = 0
-    total_healthcare = 0
-    for qs in total_salary:
-        total_net_salary += qs.net_salary
-        total_solfa += qs.solfa1
-        total_overtime += qs.overtime
-        total_healthcare += qs.health_care
-        print(total_net_salary)
+        total_salary = Salary.objects.filter(user=user)
+        total_net_salary = 0
+        total_solfa = 0
+        total_overtime = 0
+        total_healthcare = 0
+        for qs in total_salary:
+            total_net_salary += qs.net_salary
+            total_solfa += qs.solfa1
+            total_overtime += qs.overtime
+            total_healthcare += qs.health_care
+            print(total_net_salary)
 
-    salary = {
-        'total_salary': total_net_salary,
-        'total_solfa': total_solfa,
-        'total_overtime': total_overtime,
-        'total_healthcare': total_healthcare
+        salary = {
+            'total_salary': total_net_salary,
+            'total_solfa': total_solfa,
+            'total_overtime': total_overtime,
+            'total_healthcare': total_healthcare
 
-    }
-    print(salary)
-    return render(request, 'dash.html', salary)
+        }
+        print(salary)
+        return render(request, 'dash.html', salary)
 
 
 def emport(request):
