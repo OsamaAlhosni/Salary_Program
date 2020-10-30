@@ -60,26 +60,26 @@ def dashboard(request):
         # if request.method == 'GET':
         #     return render(request,'dash.html')
         # else:
-            user = request.user
-            salary = Salary.objects.filter(user=user)
-            total_salary = Salary.objects.filter(user=user)
-            total_net_salary = 0
-            total_solfa = 0
-            total_overtime = 0
-            total_healthcare = 0
-            for qs in total_salary:
-                total_net_salary += qs.net_salary
-                total_solfa += qs.solfa1
-                total_overtime += qs.overtime
-                total_healthcare += qs.health_care
-            salary = {
-                'total_salary': total_net_salary,
-                'total_solfa': total_solfa,
-                'total_overtime': total_overtime,
-                'total_healthcare': total_healthcare
+        user = request.user
+        salary = Salary.objects.filter(user=user)
+        total_salary = Salary.objects.filter(user=user)
+        total_net_salary = 0
+        total_solfa = 0
+        total_overtime = 0
+        total_healthcare = 0
+        for qs in total_salary:
+            total_net_salary += qs.net_salary
+            total_solfa += qs.solfa1
+            total_overtime += qs.overtime
+            total_healthcare += qs.health_care
+        salary = {
+            'total_salary': total_net_salary,
+            'total_solfa': total_solfa,
+            'total_overtime': total_overtime,
+            'total_healthcare': total_healthcare
 
-            }
-            return render(request, 'dash.html', salary)
+        }
+        return render(request, 'dash.html', salary)
 
 
 def emport(request):
@@ -98,17 +98,22 @@ def emport(request):
 
 def profile(request):
     def update_email():
-          email_user = User.objects.get(username =request.user.username)
-          email_user.email =email
-          email_user.save()
-          
+        email_user = User.objects.get(username=request.user.username)
+        email_user.email = email
+        email_user.save()
+
     if not request.user.is_authenticated:
         return redirect('/')
     else:
         if request.method == 'GET':
             user = request.user
             mangemnts = Mangement.objects.all()
-            employee = Employee.objects.filter(user=request.user)
+            try:
+                # emplo_exits = Employee.objects.get(user=request.user)
+                employee = Employee.objects.filter(user=request.user)
+            except employee.DoesNotExist:
+                employee = Employee(user=request.user)
+                employee.save()
             return render(request, 'profile.html', {'user': user, 'employee': employee, 'mangemnts': mangemnts})
         else:
             mobile_no = request.POST['mobile-no']
@@ -120,7 +125,18 @@ def profile(request):
             else:
                 sms_checkbox = True
             mang = Mangement.objects.get(id=mangement)
-            exits_profile = Employee.objects.get(user=request.user)
+            print(mang.id)
+            exits_profile, created = Employee.objects.get_or_create(
+                user=request.user)
+            if created:
+                exits_profile.moblie_no = mobile_no
+                exits_profile.send_text = True
+                exits_profile.send_voice = True
+                exits_profile.send_email = True
+                exits_profile.mangment_id = mang.id
+                exits_profile.save()
+                update_email()
+
             print(exits_profile.moblie_no)
             if exits_profile:
                 exits_profile.moblie_no = mobile_no
@@ -131,7 +147,8 @@ def profile(request):
                 exits_profile.save()
                 update_email()
             else:
-                profile_table = Employee(mangment_id = mang.id,user=request.user,moblie_no=mobile_no,send_text=True,send_voice=True,send_email=True)
+                profile_table = Employee(mangment_id=mang.id, user=request.user,
+                                         moblie_no=mobile_no, send_text=True, send_voice=True, send_email=True)
                 profile_table.save()
                 update_email()
             return redirect('dashboard')

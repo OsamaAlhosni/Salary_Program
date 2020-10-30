@@ -19,10 +19,11 @@ class EmportEmployee(models.Model):
 
 
 class Employee(models.Model):
-    mangment = models.ForeignKey(Mangement, on_delete=models.CASCADE)
+    mangment = models.ForeignKey(
+        Mangement, on_delete=models.CASCADE, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
     moblie_no = models.CharField(
-        max_length=15, null=False, blank=False, default=None)
+        max_length=15, null=True, blank=True, default=None)
     send_text = models.BooleanField(default=True)
     send_voice = models.BooleanField(default=True)
     send_email = models.BooleanField(default=False)
