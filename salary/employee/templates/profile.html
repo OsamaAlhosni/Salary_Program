@@ -19,9 +19,14 @@
                 <div class="block">
                     <!-- Basic Form Elements Content -->
                     <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data"
-                        class="form-horizontal form-bordered" >
+                        class="form-horizontal form-bordered">
                         {% csrf_token %}
                         <div class="form-group">
+                            {% if error %}
+                            <div class="alert alert-danger text-center" role="alert">
+                                {{ error }}
+                            </div>
+                            {% endif %}
                             <div class="col-md-6">
                                 <div class="col-md-10">
                                     <span class="help-block text-center" dir="rtl">{{user.first_name}}</span>
@@ -62,8 +67,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="col-md-8">
-                                    <input type="text" id="mobile-no" name="mobile-no"
-                                        class="form-control text-right" dir="rtl" placeholder="09X-XXX-XXXX" />
+                                    <input type="text" id="mobile-no" name="mobile-no" class="form-control text-right"
+                                        dir="rtl" placeholder="09X-XXX-XXXX" />
                                     {% if employee %}
                                     {% for emp in employee %}
                                     <script type="text/javascript">
@@ -83,15 +88,16 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="col-md-8">
-                                    <select id="mangement" name="mangement" class="form-control text-right"
-                                        size="1">
+                                    <select id="mangement" name="mangement" class="form-control text-right" size="1">
                                         <option value="0">الرجاء إختيار الإدارة التي تتبعها</option>
                                         {% for mangement in mangemnts %}
-                                        {% if employee %}
-                                        {% for emp in employee %}
-                                        {% endfor %}
-                                        {% endif %}
-                                        <option value="{{mangement.id}}"{% if emp.mangment_id == mangement %} selected {% endif %}>{{mangement.mangemen_name}}</option>
+
+                                        <!-- {% for emp in employee %} -->
+                                        <option value="{{mangement.id}}" {% if emp.mangment_id == mangement.id %}
+                                            selected="selected" {% endif %}>{{mangement.mangemen_name}}</option>
+
+                                        <!-- {% endfor %} -->
+
                                         {% endfor  %}
 
                                     </select>
@@ -106,18 +112,15 @@
                         <div class="form-group">
                             <div class="col-md-9 text-right">
                                 <label class="checkbox-inline" for="sms-checkbox">
-                                    <input type="checkbox" id="sms-checkbox" name="sms-checkbox"
-                                        value="sms" />
+                                    <input type="checkbox" id="sms-checkbox" name="sms-checkbox" value="sms" />
                                     رسالة نصية
                                 </label>
                                 <label class="checkbox-inline" for="voice-checkbox">
-                                    <input type="checkbox" id="voice-checkbox" name="voice-checkbox"
-                                        value="voice" />
+                                    <input type="checkbox" id="voice-checkbox" name="voice-checkbox" value="voice" />
                                     رسالة صوتية
                                 </label>
                                 <label class="checkbox-inline" for="email-checkbox">
-                                    <input type="checkbox" id="email-checkbox" name="email-checkbox"
-                                        value="email" />
+                                    <input type="checkbox" id="email-checkbox" name="email-checkbox" value="email" />
                                     بريد إلكتروني
                                 </label>
                             </div>
@@ -126,9 +129,11 @@
                         </div>
                         <div class="form-group form-actions">
                             <div class="col-md-6 ">
-                                <button type="reset" class="btn btn-lg btn-warning btn-block">
+                                <button type="button" class="btn btn-lg btn-warning btn-block"
+                                    onclick="window.history.back();"><i class="fa fa-repeat"></i> تراجع</button>
+                                <!-- <button type="reset" class="btn btn-lg btn-warning btn-block">
                                     <i class="fa fa-repeat"></i> تراجع
-                                </button>
+                                </button> -->
                             </div>
                             <div class="col-md-6 ">
                                 <button type="submit" class="btn btn-lg btn-primary btn-block ">

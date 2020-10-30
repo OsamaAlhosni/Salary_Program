@@ -108,24 +108,45 @@ def profile(request):
         if request.method == 'GET':
             user = request.user
             mangemnts = Mangement.objects.all()
-            try:
-                # emplo_exits = Employee.objects.get(user=request.user)
-                employee = Employee.objects.filter(user=request.user)
-            except employee.DoesNotExist:
-                employee = Employee(user=request.user)
-                employee.save()
-            return render(request, 'profile.html', {'user': user, 'employee': employee, 'mangemnts': mangemnts})
+            exits_profile, created = Employee.objects.get_or_create(
+                user=request.user)
+            if created:
+                exits_profile.moblie_no = ''
+                exits_profile.send_text = True
+                exits_profile.send_voice = True
+                exits_profile.send_email = True
+                exits_profile.save()
+            employee = Employee.objects.filter(user=request.user)
+            return render(request, 'profile.html', {'user': user, 'employee': employee, 'mangemnts': mangemnts, 'error': 'خطأ'})
         else:
             mobile_no = request.POST['mobile-no']
             email = request.POST['email-input']
             mangement = request.POST['mangement']
             sms_checkbox = request.POST.get('sms-checkbox')
+            voice_checkbox = request.POST.get('voice-checkbox')
+            email_checkbox = request.POST.get('email-checkbox')
+            user = request.user
+            # set sms check box
             if not sms_checkbox:
                 sms_checkbox = False
             else:
                 sms_checkbox = True
+            # set voice check box
+            if not voice_checkbox:
+                voice_checkbox = False
+            else:
+                voice_checkbox = True
+            # set email check box
+            if not email_checkbox:
+                email_checkbox = False
+            else:
+                email_checkbox = True
+
+            # if mangement == '0':
+            #     return render(request, 'profile.html', {'error': 'يجب تحديد الإدارة التي تتبعها'})
+            # else:
             mang = Mangement.objects.get(id=mangement)
-            print(mang.id)
+            print(mangement)
             exits_profile, created = Employee.objects.get_or_create(
                 user=request.user)
             if created:
