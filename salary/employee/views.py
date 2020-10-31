@@ -6,6 +6,7 @@ from django.db.models import Sum
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import EmportEmployee, Salary, Employee, Mangement
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
@@ -173,3 +174,29 @@ def profile(request):
                 profile_table.save()
                 update_email()
             return redirect('dashboard')
+
+
+def views_salary(request):
+
+    salarys_list = Salary.objects.filter(
+        user=request.user).order_by('-sMonth', '-sYear')
+    total_salary = 0
+    for total in salarys_list:
+        total_salary += total.net_salary
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(salarys_list, 4)
+    try:
+        salarys = paginator.page(page)
+    except PageNotAnInteger:
+        salarys = paginator.page(1)
+    except EmptyPage:
+        salarys = paginator.page(paginator.num_pages)
+
+    return render(request, 'salary_view.html', {'salarys': salarys, 'total_salary': total_salary})
+
+
+def salary(request, salary_pk):
+    salary = get_object_or_404(Salary, pk=salary_pk, user=request.user)
+    # salary = Salary.objects.filter(id=salary_pk)
+    return render(request, 'salary.html', {'salary': salary})

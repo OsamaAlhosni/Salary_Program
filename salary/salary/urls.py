@@ -16,5 +16,7 @@ urlpatterns = [
     path('dash/', views.dashboard, name='dashboard'),
     path('emport/', views.emport, name='emport'),
     path('profile/', views.profile, name='profile'),
+    path('views_salary/', views.views_salary, name='views_salary'),
+    path('salary/<int:salary_pk>', views.salary, name='salary'),
 
 ]

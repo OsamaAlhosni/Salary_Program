@@ -46,7 +46,7 @@
     <!-- END Stylesheets -->
 
     <!-- Modernizr (browser feature detection library) -->
-    <script src="{% static 'front/js/vendor/modernizr.min.js' %}"></script>
+    <script src="{% static 'js/vendor/modernizr.min.js' %}"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
@@ -101,17 +101,17 @@
                                 <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom"
                                     title="Settings" onclick="$('#modal-user-settings').modal('show');"><i
                                         class="gi gi-cogwheel"></i></a>
-                                        <!-- <a href="#" onclick="$('#signOutBtn').click()" class="nav-link active ">تسجيل خروج</a>
+                                <!-- <a href="#" onclick="$('#signOutBtn').click()" class="nav-link active ">تسجيل خروج</a>
                                         <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
                                             {% csrf_token %}
                                             <button id="signOutBtn" type="submit">تسجيل خروج</button>
                                         </form> -->
-                        
-                <a href="#" onclick="$('#signOutBtn').click()" class="nav-link active ">تسجيل خروج</a>
-                <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
-                    {% csrf_token %}
-                    <button id="signOutBtn" type="submit">تسجيل خروج</button>
-                </form>
+
+                                <a href="#" onclick="$('#signOutBtn').click()" class="nav-link active ">تسجيل خروج</a>
+                                <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
+                                    {% csrf_token %}
+                                    <button id="signOutBtn" type="submit">تسجيل خروج</button>
+                                </form>
                             </div>
                         </div>
                         <!-- END User Info -->

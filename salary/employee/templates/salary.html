@@ -1,0 +1,16 @@
+{% extends 'master.html' %} {% load static %} {% block mainblock %}
+
+<body style="font-family: 'Cairo', sans-serif">
+  <div id="page-content">
+    <div class="row">
+      <div class="col-md-10">
+        <span class="help-block text-center" dir="rtl">{{salary.net_salary}}</span>
+      </div>
+      <div class="col-md-2">
+        <span class="help-block text-center" dir="rtl">الإسم واللقب</span>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock mainblock %}

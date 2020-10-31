@@ -1,0 +1,113 @@
+{% extends 'master.html' %}
+{% load static %}
+
+
+{% block mainblock %}
+<!-- Page content -->
+<div id="page-content">
+    <!-- Table Responsive Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1 class="text-center" dir="rtl">
+                <i class="gi gi-money"></i>كشف المرتبات<br><small>حركة جميع المرتبات التي تم
+                    صرفها</small>
+            </h1>
+        </div>
+    </div>
+    <!-- END Table Responsive Header -->
+
+    <!-- Responsive Partial Block -->
+    <div class="block">
+        <!-- Responsive Partial Title -->
+        <div>
+            <h2 class="text-center text-success">كشف المرتبات</h2>
+        </div>
+        <!-- END Responsive Partial Title -->
+
+        <!-- Responsive Partial Content -->
+        <table class="table table-vcenter table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 150px;" class="text-center">عرض المزيد</th>
+                    <th class="hidden-sm hidden-xs">العمل الإضافي</th>
+                    <th class="hidden-sm hidden-xs">الرعاية الصحية</th>
+                    <th class="hidden-sm hidden-xs">السلفة</th>
+                    <th>صافي المرتب</th>
+                    <th class="hidden-xs">السنة</th>
+                    <th>الشهر</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for salary in salarys %}
+                <tr>
+                    <td class="text-center">
+                        <a href="page_ready_user_profile.html">تفاصيل المرتب</a>
+                    </td>
+                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
+                            class="label label-warning">{{salary.overtime}}</a>
+                    </td>
+                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
+                            class="label label-warning">{{salary.health_care}}</a>
+                    </td>
+                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
+                            class="label label-warning">{{salary.solfa1}}</a>
+                    </td>
+                    <td><a href="javascript:void(0)" class="label label-warning">{{salary.net_salary}}</a></td>
+                    <td class="hidden-xs">{{salary.sYear}}</td>
+                    <td><a href="{% url 'salary' salary.id %}">{{salary.sMonth}}</a></td>
+                </tr>
+                {% endfor %}
+
+                <!-- <tr>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-xs">
+                            <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-default"><i
+                                    class="fa fa-pencil"></i></a>
+                            <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i
+                                    class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">0.0</a>
+                    </td>
+                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">0.0</a>
+                    </td>
+                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">450.000</a>
+                    </td>
+                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
+                            class="label label-warning">1735.395</a></td>
+                    <td class="hidden-xs">2020</td>
+                    <td><a href="page_ready_user_profile.html">8</a></td>
+                    <td class="text-center"><img src="{% static 'img/placeholders/avatars/avatar12.jpg' %}" alt="avatar"
+                            class="img-circle"></td>
+                </tr> -->
+            </tbody>
+        </table>
+        {% if salarys.has_other_pages %}
+        <ul class="pagination">
+            {% if salarys.has_previous %}
+            <li><a href="?page={{ salarys.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in salarys.paginator.page_range %}
+            {% if salarys.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if salarys.has_next %}
+            <li><a href="?page={{ salarys.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+        <!-- END Responsive Partial Content -->
+    </div>
+    <!-- END Responsive Partial Block -->
+    <h2>{{total_salary}}</h2>
+</div>
+<!-- END Page Content -->
+
+{% endblock mainblock %}
