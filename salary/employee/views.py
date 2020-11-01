@@ -62,7 +62,7 @@ def dashboard(request):
         #     return render(request,'dash.html')
         # else:
         user = request.user
-        salary = Salary.objects.filter(user=user)
+        salarys = Salary.objects.filter(user=user)
         total_salary = Salary.objects.filter(user=user)
         total_net_salary = 0
         total_solfa = 0
@@ -77,7 +77,9 @@ def dashboard(request):
             'total_salary': total_net_salary,
             'total_solfa': total_solfa,
             'total_overtime': total_overtime,
-            'total_healthcare': total_healthcare
+            'total_healthcare': total_healthcare,
+            'salarys':salarys,
+
 
         }
         return render(request, 'dash.html', salary)

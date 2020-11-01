@@ -1,132 +1,169 @@
-{% extends 'master.html' %}
-{% load static %}
-
-
-{% block mainblock %}
-
-<body style="font-family:  'Cairo', sans-serif;">
-    <div id="page-content">
-        <div class="content-header content-header-media">
-            <div class="header-section">
-                <div class="row">
-                    <!-- Main Title (hidden on small devices for the statistics to fit) -->
-                    <div class="col-md-4 col-lg-12 hidden-xs hidden-sm text-right">
-                        <h1>مرحبا <strong class="text-primary">{{ user.get_short_name }}</strong><br><small>كيف حالك
-                                اليوم</small><br><small class="text-danger">{{ user.last_login }}</small><small>
-                                تاريخ
-                                أخر دخول لك كان في </small></h1>
-                    </div>
-                </div>
-            </div>
-            <img src="{% static 'img/placeholders/headers/dashboard_header.jpg' %}" alt="header image"
-                class="animation-pulseSlow">
-        </div>
+{% extends 'master.html' %} {% load static %} {% block mainblock %}
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<body style="font-family: 'Cairo', sans-serif">
+  <div id="page-content">
+    <div class="content-header content-header-media">
+      <div class="header-section">
         <div class="row">
-            <div class="col-sm-6 col-lg-3">
-                <!-- Widget -->
-                <a href="/health_care" class="widget widget-hover-effect1">
-                    <div class="widget-simple">
-                        <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
-                            <i class="gi gi-heart_empty"></i>
-                        </div>
-                        <h3 class="widget-content text-right animation-pullDown">
-                            <strong>الرعاية الصحية</strong>
-                            <small>تفاصيل الرعاية الصحية</small>
-                        </h3>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="/loan" class="widget widget-hover-effect1">
-                    <div class="widget-simple">
-                        <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
-                            <i class="gi gi-bank"></i>
-                        </div>
-                        <h3 class="widget-content text-right animation-pullDown">
-                            <strong>السلف والقروض</strong>
-                            <small>كشف حركة السلف والقروض</small>
-                        </h3>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="/views_salary" class="widget widget-hover-effect1">
-                    <div class="widget-simple">
-                        <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                            <i class="gi gi-usd"></i>
-                        </div>
-                        <h3 class="widget-content text-right animation-pullDown">
-                            <strong>مراجعة المرتب</strong><br>
-                            <small>تفاصيل مرتباتك</small>
-                        </h3>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <a href="/profile" class="widget widget-hover-effect1">
-                    <div class="widget-simple">
-                        <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
-                            <i class="fa fa-file-text"></i>
-                        </div>
-                        <h3 class="widget-content text-right animation-pullDown">
-                            فتح <strong>بيانتك الوظيفية</strong><br>
-                            <small>البيانات الأساسية</small>
-                        </h3>
-                    </div>
-                </a>
-            </div>
+          <!-- Main Title (hidden on small devices for the statistics to fit) -->
+          <div class="col-md-4 col-lg-12 hidden-xs hidden-sm text-right">
+            <h1>
+              مرحبا
+              <strong class="text-primary">{{ user.get_short_name }}</strong
+              ><br /><small>كيف حالك اليوم</small><br /><small
+                class="text-danger"
+                >{{ user.last_login }}</small
+              ><small> تاريخ أخر دخول لك كان في </small>
+            </h1>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="widget">
-                    <div class="widget-extra themed-background-dark">
-                        <div class="widget-options">
-                            <div class="btn-group btn-group-xs">
-                                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
-                                    title="Edit Widget"><i class="fa fa-pencil"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
-                                    title="Quick Settings"><i class="fa fa-cog"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="widget-content-light">
-                            <strong>رسومات بيانية عن مرتباتك الشهرية</strong>
-                            <small><a href="page_ready_pricing_tables.html"><strong>توضيحية</strong></a></small>
-                        </h3>
-                    </div>
-                    <div class="widget-extra-full">
-                        <div class="row text-center">
+      </div>
+      <img
+        src="{% static 'img/placeholders/headers/dashboard_header.jpg' %}"
+        alt="header image"
+        class="animation-pulseSlow"
+      />
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-lg-3">
+        <!-- Widget -->
+        <a href="/health_care" class="widget widget-hover-effect1">
+          <div class="widget-simple">
+            <div
+              class="widget-icon pull-left themed-background-fire animation-fadeIn"
+            >
+              <i class="gi gi-heart_empty"></i>
+            </div>
+            <h3 class="widget-content text-right animation-pullDown">
+              <strong>الرعاية الصحية</strong>
+              <small>تفاصيل الرعاية الصحية</small>
+            </h3>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="/loan" class="widget widget-hover-effect1">
+          <div class="widget-simple">
+            <div
+              class="widget-icon pull-left themed-background-amethyst animation-fadeIn"
+            >
+              <i class="gi gi-bank"></i>
+            </div>
+            <h3 class="widget-content text-right animation-pullDown">
+              <strong>السلف والقروض</strong>
+              <small>كشف حركة السلف والقروض</small>
+            </h3>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="/views_salary" class="widget widget-hover-effect1">
+          <div class="widget-simple">
+            <div
+              class="widget-icon pull-left themed-background-spring animation-fadeIn"
+            >
+              <i class="gi gi-usd"></i>
+            </div>
+            <h3 class="widget-content text-right animation-pullDown">
+              <strong>مراجعة المرتب</strong><br />
+              <small>تفاصيل مرتباتك</small>
+            </h3>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="/profile" class="widget widget-hover-effect1">
+          <div class="widget-simple">
+            <div
+              class="widget-icon pull-left themed-background-autumn animation-fadeIn"
+            >
+              <i class="fa fa-file-text"></i>
+            </div>
+            <h3 class="widget-content text-right animation-pullDown">
+              فتح <strong>بيانتك الوظيفية</strong><br />
+              <small>البيانات الأساسية</small>
+            </h3>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="widget">
+          <div class="widget-extra themed-background-dark">
+            <div class="widget-options">
+              <div class="btn-group btn-group-xs">
+                <a
+                  href="javascript:void(0)"
+                  class="btn btn-default"
+                  data-toggle="tooltip"
+                  title="Edit Widget"
+                  ><i class="fa fa-pencil"></i
+                ></a>
+                <a
+                  href="javascript:void(0)"
+                  class="btn btn-default"
+                  data-toggle="tooltip"
+                  title="Quick Settings"
+                  ><i class="fa fa-cog"></i
+                ></a>
+              </div>
+            </div>
+            <h3 class="widget-content-light">
+              <strong>رسومات بيانية عن مرتباتك الشهرية</strong>
+              <small
+                ><a href="page_ready_pricing_tables.html"
+                  ><strong>توضيحية</strong></a
+                ></small
+              >
+            </h3>
+          </div>
+          <div class="widget-extra-full">
+            <div class="row text-center">
+              <div class="col-xs-6 col-lg-3">
+                <h3>
+                  <strong> {{total_overtime}} </strong> <small>دينار</small
+                  ><br />
+                  <small
+                    ><i class="fa fa-envelope-o"></i> اجمالي العمل
+                    الاضافي</small
+                  >
+                </h3>
+              </div>
+              <div class="col-xs-6 col-lg-3">
+                <h3>
+                  <strong> {{total_healthcare}} </strong> <small> دينار </small
+                  ><br />
+                  <small
+                    ><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية
+                  </small>
+                </h3>
+              </div>
 
-                            <div class="col-xs-6 col-lg-3">
-                                <h3>
-                                    <strong> {{total_overtime}} </strong> <small>دينار</small><br>
-                                    <small><i class="fa fa-envelope-o"></i> اجمالي العمل الاضافي</small>
-                                </h3>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <h3>
-                                    <strong> {{total_healthcare}} </strong> <small> دينار </small><br>
-                                    <small><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية </small>
-                                </h3>
-                            </div>
+              <div class="col-xs-6 col-lg-3">
+                <h3>
+                  <strong> {{total_solfa}} </strong> <small> دينار </small
+                  ><br />
+                  <small
+                    ><i class="fa fa-hdd-o"></i> اجمالي أقساط السلف المخصومة
+                  </small>
+                </h3>
+              </div>
 
-                            <div class="col-xs-6 col-lg-3">
-                                <h3>
-                                    <strong> {{total_solfa}} </strong> <small> دينار </small><br>
-                                    <small><i class="fa fa-hdd-o"></i> اجمالي أقساط السلف المخصومة </small>
-                                </h3>
-                            </div>
-
-                            <div class="col-xs-6 col-lg-3">
-                                <h3>
-                                    <strong> {{total_salary}} </strong> <small> دينار </small><br>
-                                    <small><i class="fa fa-folder-open-o"></i> إجمالي صافي المرتبات المصروفة</small>
-                                </h3>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="widget">
+              <div class="col-xs-6 col-lg-3">
+                <h3>
+                  <strong> {{total_salary}} </strong> <small> دينار </small
+                  ><br />
+                  <small
+                    ><i class="fa fa-folder-open-o"></i> إجمالي صافي المرتبات
+                    المصروفة</small
+                  >
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="widget">
                     <div class="widget-advanced widget-advanced-alt">
                         <div class="widget-header text-center themed-background">
                             <h3 class="widget-content-light text-right pull-right animation-pullDown">
@@ -145,12 +182,40 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
+        <div id="myChart">
 
-            </div>
         </div>
-        <!-- END Widgets Row -->
+      </div>
     </div>
+    <!-- END Widgets Row -->
+  </div>
+  <script>
+      var chartdata ={
+          "type": "bar",
+          "scale-x" :{
+              "values": [ 
+              "شهر 8",
+              "شهر 7",
+              "شهر 6"
+              ]
+          },
+          "series" :[
+                {
+                    "values":[
+                        1636.779,
+                        1462.380,
+                        1558.380
+                    ]
+                }
+          ]
+
+      }
+      zingchart.render({
+        id: 'myChart',
+        data: chartdata,
+      });
+  </script>
 </body>
 
 {% endblock mainblock %}
