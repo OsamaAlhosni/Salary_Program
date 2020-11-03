@@ -18,5 +18,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('views_salary/', views.views_salary, name='views_salary'),
     path('salary/<int:salary_pk>', views.salary, name='salary'),
+    path('resultdata/', views.resultdata, name='resultdata'),
 
 ]

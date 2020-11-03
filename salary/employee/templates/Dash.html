@@ -1,5 +1,6 @@
 {% extends 'master.html' %} {% load static %} {% block mainblock %}
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
 <body style="font-family: 'Cairo', sans-serif">
   <div id="page-content">
     <div class="content-header content-header-media">
@@ -192,12 +193,12 @@
   </div>
   <script>
       var chartdata ={
-          "type": "bar",
+          "type":"bar",
           "scale-x" :{
-              "values": [ 
-              "شهر 8",
-              "شهر 7",
-              "شهر 6"
+              "values": [ "1",
+              "1",
+              "1",
+              "1",
               ]
           },
           "series" :[
@@ -205,7 +206,9 @@
                     "values":[
                         1636.779,
                         1462.380,
-                        1558.380
+                        1558.380,
+                        1350.450,
+                        1280.654
                     ]
                 }
           ]

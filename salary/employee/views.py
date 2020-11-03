@@ -7,7 +7,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import EmportEmployee, Salary, Employee, Mangement
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.http import JsonResponse
+import json
 
 def home(request):
     return render(request, 'home.html')
@@ -145,9 +146,6 @@ def profile(request):
             else:
                 email_checkbox = True
 
-            # if mangement == '0':
-            #     return render(request, 'profile.html', {'error': 'يجب تحديد الإدارة التي تتبعها'})
-            # else:
             mang = Mangement.objects.get(id=mangement)
             print(mangement)
             exits_profile, created = Employee.objects.get_or_create(
@@ -202,3 +200,16 @@ def salary(request, salary_pk):
     salary = get_object_or_404(Salary, pk=salary_pk, user=request.user)
     # salary = Salary.objects.filter(id=salary_pk)
     return render(request, 'salary.html', {'salary': salary})
+
+def resultdata(request):
+    salarydata = {
+        
+    }
+    salary = Salary.objects.filter(user=request.user)
+    for i in salary:
+        # salarydata.append({i.sMonth,i.net_salary})
+        salarydata.setdefault(i.sMonth,[]).append(i.net_salary)
+    print(salarydata)
+    return JsonResponse(salarydata,safe=False)
+
+    
