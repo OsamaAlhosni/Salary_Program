@@ -1,5 +1,8 @@
 {% extends 'master.html' %} {% load static %} {% block mainblock %}
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css"></script>
+
 
 <body style="font-family: 'Cairo', sans-serif">
   <div id="page-content">
@@ -10,29 +13,22 @@
           <div class="col-md-4 col-lg-12 hidden-xs hidden-sm text-right">
             <h1>
               مرحبا
-              <strong class="text-primary">{{ user.get_short_name }}</strong
-              ><br /><small>كيف حالك اليوم</small><br /><small
-                class="text-danger"
-                >{{ user.last_login }}</small
-              ><small> تاريخ أخر دخول لك كان في </small>
+              <strong class="text-primary">{{ user.get_short_name }}</strong><br /><small>كيف حالك
+                اليوم</small><br /><small class="text-danger">{{ user.last_login }}</small><small> تاريخ أخر دخول لك كان
+                في </small>
             </h1>
           </div>
         </div>
       </div>
-      <img
-        src="{% static 'img/placeholders/headers/dashboard_header.jpg' %}"
-        alt="header image"
-        class="animation-pulseSlow"
-      />
+      <img src="{% static 'img/placeholders/headers/dashboard_header.jpg' %}" alt="header image"
+        class="animation-pulseSlow" />
     </div>
     <div class="row">
       <div class="col-sm-6 col-lg-3">
         <!-- Widget -->
         <a href="/health_care" class="widget widget-hover-effect1">
           <div class="widget-simple">
-            <div
-              class="widget-icon pull-left themed-background-fire animation-fadeIn"
-            >
+            <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
               <i class="gi gi-heart_empty"></i>
             </div>
             <h3 class="widget-content text-right animation-pullDown">
@@ -45,9 +41,7 @@
       <div class="col-sm-6 col-lg-3">
         <a href="/loan" class="widget widget-hover-effect1">
           <div class="widget-simple">
-            <div
-              class="widget-icon pull-left themed-background-amethyst animation-fadeIn"
-            >
+            <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
               <i class="gi gi-bank"></i>
             </div>
             <h3 class="widget-content text-right animation-pullDown">
@@ -60,9 +54,7 @@
       <div class="col-sm-6 col-lg-3">
         <a href="/views_salary" class="widget widget-hover-effect1">
           <div class="widget-simple">
-            <div
-              class="widget-icon pull-left themed-background-spring animation-fadeIn"
-            >
+            <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
               <i class="gi gi-usd"></i>
             </div>
             <h3 class="widget-content text-right animation-pullDown">
@@ -75,9 +67,7 @@
       <div class="col-sm-6 col-lg-3">
         <a href="/profile" class="widget widget-hover-effect1">
           <div class="widget-simple">
-            <div
-              class="widget-icon pull-left themed-background-autumn animation-fadeIn"
-            >
+            <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
               <i class="fa fa-file-text"></i>
             </div>
             <h3 class="widget-content text-right animation-pullDown">
@@ -94,96 +84,52 @@
           <div class="widget-extra themed-background-dark">
             <div class="widget-options">
               <div class="btn-group btn-group-xs">
-                <a
-                  href="javascript:void(0)"
-                  class="btn btn-default"
-                  data-toggle="tooltip"
-                  title="Edit Widget"
-                  ><i class="fa fa-pencil"></i
-                ></a>
-                <a
-                  href="javascript:void(0)"
-                  class="btn btn-default"
-                  data-toggle="tooltip"
-                  title="Quick Settings"
-                  ><i class="fa fa-cog"></i
-                ></a>
+                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Edit Widget"><i
+                    class="fa fa-pencil"></i></a>
+                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Quick Settings"><i
+                    class="fa fa-cog"></i></a>
               </div>
             </div>
             <h3 class="widget-content-light">
               <strong>رسومات بيانية عن مرتباتك الشهرية</strong>
-              <small
-                ><a href="page_ready_pricing_tables.html"
-                  ><strong>توضيحية</strong></a
-                ></small
-              >
+              <small><a href="page_ready_pricing_tables.html"><strong>توضيحية</strong></a></small>
             </h3>
           </div>
           <div class="widget-extra-full">
             <div class="row text-center">
               <div class="col-xs-6 col-lg-3">
                 <h3>
-                  <strong> {{total_overtime}} </strong> <small>دينار</small
-                  ><br />
-                  <small
-                    ><i class="fa fa-envelope-o"></i> اجمالي العمل
-                    الاضافي</small
-                  >
+                  <strong> {{total_overtime}} </strong> <small>دينار</small><br />
+                  <small><i class="fa fa-envelope-o"></i> اجمالي العمل
+                    الاضافي</small>
                 </h3>
               </div>
               <div class="col-xs-6 col-lg-3">
                 <h3>
-                  <strong> {{total_healthcare}} </strong> <small> دينار </small
-                  ><br />
-                  <small
-                    ><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية
+                  <strong> {{total_healthcare}} </strong> <small> دينار </small><br />
+                  <small><i class="fa fa-building-o"></i> اجمالي الرعاية الصحية
                   </small>
                 </h3>
               </div>
 
               <div class="col-xs-6 col-lg-3">
                 <h3>
-                  <strong> {{total_solfa}} </strong> <small> دينار </small
-                  ><br />
-                  <small
-                    ><i class="fa fa-hdd-o"></i> اجمالي أقساط السلف المخصومة
+                  <strong> {{total_solfa}} </strong> <small> دينار </small><br />
+                  <small><i class="fa fa-hdd-o"></i> اجمالي أقساط السلف المخصومة
                   </small>
                 </h3>
               </div>
 
               <div class="col-xs-6 col-lg-3">
                 <h3>
-                  <strong> {{total_salary}} </strong> <small> دينار </small
-                  ><br />
-                  <small
-                    ><i class="fa fa-folder-open-o"></i> إجمالي صافي المرتبات
-                    المصروفة</small
-                  >
+                  <strong> {{total_salary}} </strong> <small> دينار </small><br />
+                  <small><i class="fa fa-folder-open-o"></i> إجمالي صافي المرتبات
+                    المصروفة</small>
                 </h3>
               </div>
             </div>
           </div>
         </div>
-        <!-- <div class="widget">
-                    <div class="widget-advanced widget-advanced-alt">
-                        <div class="widget-header text-center themed-background">
-                            <h3 class="widget-content-light text-right pull-right animation-pullDown">
-                                <strong>اجمالي الدخل</strong> &amp; <strong>الخصميات</strong><br>
-                                <small> لأخر سنة </small>
-                            </h3>
-
-                            {% block scripts %}
-
-                            {% endblock scripts %}
-
-                            {% block contenet %}
-
-                            {% endblock contenet %}
-                            <div id="dash-widget-chart" class="chart"></div>
-                        </div>
-
-                    </div>
-                </div> -->
         <div id="myChart">
 
         </div>
@@ -191,34 +137,82 @@
     </div>
     <!-- END Widgets Row -->
   </div>
+
+  <canvas id="myChart"></canvas>
   <script>
-      var chartdata ={
-          "type":"bar",
-          "scale-x" :{
-              "values": [ "1",
-              "1",
-              "1",
-              "1",
-              ]
-          },
-          "series" :[
-                {
-                    "values":[
-                        1636.779,
-                        1462.380,
-                        1558.380,
-                        1350.450,
-                        1280.654
-                    ]
-                }
-          ]
+    let myChary = document.getElementById("myChart").getContext('2d');
+
+    let massChart = new Chart(ctx1, {
+
+      type: 'bar',
+      data: {
+        labels: ['Month 6', 'Month 7', 'Month 8'],
+        datasets: [
+          1670.230,
+          1879.450,
+          1209.324]
+      },
+      options: {
+
+      }
+    });
+
+
+  </script>
+
+  <!-- <script>
+    var state = {
+      'items': [],
+      'values': [],
+    }
+    var dataURL = '/resultdata/'
+    $.ajax({
+      method: 'GET',
+      url: dataURL,
+      success: function (response) {
+        for (var i in response) {
+          var key = Object.keys(response[i])[0]
+          var value = Object.values(response[i])[0]
+          state.items.push(key)
+          state.values.push(value)
+        }
+        buildChart()
+      }
+    })
+
+    function buildChart() {
+      var chartdata = {
+        "type": "line",
+        "title": {
+          "text": "المخطط البياني لحركة الرواتب",
+          "fontSize": 18
+        },
+        "scale-x": {
+          "values": state.items
+        },
+        "plot": {
+          "animation": {
+            "delay": "100",
+            "effect": "4",
+            "method": "5",
+            "sequence": "1"
+          }
+        },
+        "series": [
+          {
+            "values": state.values
+          }
+        ]
 
       }
       zingchart.render({
         id: 'myChart',
         data: chartdata,
       });
-  </script>
+
+    }
+
+  </script> -->
 </body>
 
 {% endblock mainblock %}

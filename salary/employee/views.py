@@ -10,6 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 import json
 
+
 def home(request):
     return render(request, 'home.html')
 
@@ -79,7 +80,7 @@ def dashboard(request):
             'total_solfa': total_solfa,
             'total_overtime': total_overtime,
             'total_healthcare': total_healthcare,
-            'salarys':salarys,
+            'salarys': salarys,
 
 
         }
@@ -201,15 +202,12 @@ def salary(request, salary_pk):
     # salary = Salary.objects.filter(id=salary_pk)
     return render(request, 'salary.html', {'salary': salary})
 
+
 def resultdata(request):
-    salarydata = {
-        
-    }
+    salarydata = []
     salary = Salary.objects.filter(user=request.user)
     for i in salary:
-        # salarydata.append({i.sMonth,i.net_salary})
-        salarydata.setdefault(i.sMonth,[]).append(i.net_salary)
+        salarydata.append({i.sMonth: i.net_salary})
+        # salarydata.setdefault(i.sMonth,[]).append(i.net_salary)
     print(salarydata)
-    return JsonResponse(salarydata,safe=False)
-
-    
+    return JsonResponse(salarydata, safe=False)
