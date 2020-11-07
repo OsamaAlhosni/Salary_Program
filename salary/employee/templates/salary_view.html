@@ -9,7 +9,7 @@
     <div class="content-header">
         <div class="header-section">
             <h1 class="text-center" dir="rtl">
-                <i class="gi gi-money"></i>كشف المرتبات<br><small>حركة جميع المرتبات التي تم
+                <i class="gi gi-money text-success"></i>كشف المرتبات<br><small>حركة جميع المرتبات التي تم
                     صرفها</small>
             </h1>
         </div>
@@ -41,7 +41,7 @@
                 {% for salary in salarys %}
                 <tr>
                     <td class="text-center">
-                        <a href="page_ready_user_profile.html">تفاصيل المرتب</a>
+                        <a href="{% url 'salary' salary.id %}">تفاصيل المرتب</a>
                     </td>
                     <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
                             class="label label-warning">{{salary.overtime}}</a>
@@ -106,7 +106,11 @@
         <!-- END Responsive Partial Content -->
     </div>
     <!-- END Responsive Partial Block -->
-    <h2>{{total_salary}}</h2>
+    <div class="container text-center ">
+        <h2 class="text-success">إجمالي المرتبات {{total_salary}}</h2>
+        <h2 class="text-info">إجمالي خدمة الرعاية الصحية {{total_care}}</h2>
+        <h2 class="text-danger">إجمالي أقساط السلف المخصومة {{total_solf}}</h2>
+    </div>
 </div>
 <!-- END Page Content -->
 

@@ -2,26 +2,29 @@
 
 <body style="font-family: 'Cairo', sans-serif">
   <div id="page-content">
-    <div class="row">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-10">
-        <div class="card text-right text-white bg-success mb-3">
-          <h2 class="card-header text-center text-danger">تفاصيل المرتب</h2>
-          <div class="card-body">
-            <h3 class="card-title"> <strong> المرتب الأساسي </strong> {{ salary.base_salary }}</h3>
-            <h3 class="card-title"> <strong> إجمالي المرتب </strong> {{ salary.total_salary }}</h3>
-            <h3 class="card-title"> <strong> العمل الإضافي </strong> {{ salary.overtime }}</h3>
-            <h3 class="card-title"> <strong> الرعاية الصحية </strong> {{ salary.health_care }}</h3>
-            <h3 class="card-title"> <strong> قسط السلفة </strong> {{ salary.solfa2 }}</h3>
-            <a href="#" class="btn btn-primary">العودة إلى القائمة الرئيسية</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card text-center text-white bg-success mb-3 ">
+            <h2 class="card-header text-center text-danger">تفاصيل المرتب</h2>
+            <hr>
+            <div class="card-body">
+              <h3 class="card-title"> <strong> المرتب الأساسي </strong> {{ salary.base_salary }}</h3>
+              <h3 class="card-title"> <strong> إجمالي المرتب </strong> {{ salary.total_salary }}</h3>
+              <h3 class="card-title"> <strong> العمل الإضافي </strong> {{ salary.overtime }}</h3>
+              <h3 class="card-title"> <strong> الرعاية الصحية </strong> {{ salary.health_care }}</h3>
+              <h3 class="card-title"> <strong> قسط السلفة </strong> {{ salary.solfa2 }}</h3>
+              <hr>
+              <a href="/views_salary/" class="btn btn-primary">العودة الى كشف الرواتب</a>
+            </div>
           </div>
         </div>
-      </div> 
-  
+
+
+      </div>
     </div>
-    </div>
-  
+  </div>
+
 </body>
 
 {% endblock mainblock %}

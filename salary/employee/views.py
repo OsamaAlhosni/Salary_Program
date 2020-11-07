@@ -182,8 +182,12 @@ def views_salary(request):
     salarys_list = Salary.objects.filter(
         user=request.user).order_by('-sMonth', '-sYear')
     total_salary = 0
+    total_care = 0
+    total_solf = 0
     for total in salarys_list:
         total_salary += total.net_salary
+        total_care += total.health_care
+        total_solf += total.solfa1
     page = request.GET.get('page', 1)
 
     paginator = Paginator(salarys_list, 4)
@@ -194,7 +198,7 @@ def views_salary(request):
     except EmptyPage:
         salarys = paginator.page(paginator.num_pages)
 
-    return render(request, 'salary_view.html', {'salarys': salarys, 'total_salary': total_salary})
+    return render(request, 'salary_view.html', {'salarys': salarys, 'total_salary': total_salary, 'total_care': total_care, 'total_solf': total_solf})
 
 
 def salary(request, salary_pk):
