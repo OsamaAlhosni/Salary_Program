@@ -3,9 +3,7 @@
 
 
 {% block mainblock %}
-<!-- Page content -->
 <div id="page-content">
-  <!-- Table Responsive Header -->
   <div class="content-header">
     <div class="header-section">
       <h1 class="text-center" dir="rtl">
@@ -14,17 +12,10 @@
       </h1>
     </div>
   </div>
-  <!-- END Table Responsive Header -->
-
-  <!-- Responsive Partial Block -->
   <div class="block">
-    <!-- Responsive Partial Title -->
     <div>
       <h2 class="text-center text-success">تفاصيل السلفة</h2>
     </div>
-    <!-- END Responsive Partial Title -->
-
-    <!-- Responsive Partial Content -->
     <table class="table table-vcenter table-striped">
       <thead>
         <tr>
@@ -40,9 +31,6 @@
       <tbody>
         {% for loan in loan_list %}
         <tr>
-          <!-- <td class="text-center">
-            <a href="{% url 'salary' salary.id %}">تفاصيل المرتب</a>
-          </td> -->
           <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">{{loan.loan}}</a>
           </td>
           <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">{{loan.balance}}</a>
@@ -50,39 +38,12 @@
           <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
               class="label label-warning">{{loan.disc_amount}}</a>
           </td>
-          <!-- <td><a href="javascript:void(0)" class="label label-warning">{{salary.net_salary}}</a></td> -->
-          <!-- <td class="hidden-xs">{{salary.sYear}}</td> -->
-          <!-- <td><a href="{% url 'salary' salary.id %}">{{salary.sMonth}}</a></td> -->
         </tr>
         {% endfor %}
 
       </tbody>
     </table>
-    {% if loan_list.has_other_pages %}
-    <ul class="pagination">
-      {% if loan_list.has_previous %}
-      <li><a href="?page={{ loan_list.previous_page_number }}">&laquo;</a></li>
-      {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-      {% endif %}
-      {% for i in loan_list.paginator.page_range %}
-      {% if loan_list.number == i %}
-      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-      <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-      {% endfor %}
-      {% if loan_list.has_next %}
-      <li><a href="?page={{ loan_list.next_page_number }}">&raquo;</a></li>
-      {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-      {% endif %}
-    </ul>
-    {% endif %}
-    <!-- END Responsive Partial Content -->
   </div>
-  <!-- END Responsive Partial Block -->
 </div>
-<!-- END Page Content -->
 
 {% endblock mainblock %}

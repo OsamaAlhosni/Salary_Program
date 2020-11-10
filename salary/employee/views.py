@@ -211,7 +211,6 @@ def views_salary(request):
 
 def salary(request, salary_pk):
     salary = get_object_or_404(Salary, pk=salary_pk, user=request.user)
-    # salary = Salary.objects.filter(id=salary_pk)
     return render(request, 'salary.html', {'salary': salary})
 
 
@@ -220,7 +219,6 @@ def resultdata(request):
     salary = Salary.objects.filter(user=request.user)
     for i in salary:
         salarydata.append({i.sMonth: i.net_salary})
-        # salarydata.setdefault(i.sMonth,[]).append(i.net_salary)
     print(salarydata)
     return JsonResponse(salarydata, safe=False)
 
