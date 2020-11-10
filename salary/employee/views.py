@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -5,7 +6,7 @@ from django.db import IntegrityError
 from django.db.models import Sum
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import EmportEmployee, Salary, Employee, Mangement
+from .models import EmportEmployee, Salary, Employee, Mangement, Loan
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 import json
@@ -91,11 +92,18 @@ def emport(request):
     if request.method == 'POST':
         password = 'password'
         employees = EmportEmployee.objects.all()
+
+        def username_exists(username):
+            if User.objects.filter(username=username).exists():
+                return True
+
+            return False
         for employee in employees:
             username = str(employee.EmpID)
-            user = User.objects.create_user(
-                username, password=password, first_name=employee.EmpName)
-            user.save()
+            if not username_exists(username):
+                user = User.objects.create_user(
+                    username, password=password, first_name=employee.EmpName)
+                user.save()
         return render(request, 'emport.html', {'Msg': 'Emport end'})
     else:
         return render(request, 'emport.html', {'Msg': 'Emport '})
@@ -215,3 +223,9 @@ def resultdata(request):
         # salarydata.setdefault(i.sMonth,[]).append(i.net_salary)
     print(salarydata)
     return JsonResponse(salarydata, safe=False)
+
+
+def loan(request):
+    loan_list = Loan.objects.filter(user=request.user)
+
+    return render(request, 'loan_list.html', {'loan_list': loan_list})
