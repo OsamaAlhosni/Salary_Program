@@ -29,32 +29,40 @@
             <thead>
                 <tr>
                     <th style="width: 150px;" class="text-center">عرض المزيد</th>
-                    <th class="hidden-sm hidden-xs">العمل الإضافي</th>
-                    <th class="hidden-sm hidden-xs">الرعاية الصحية</th>
-                    <th class="hidden-sm hidden-xs">السلفة</th>
-                    <th>صافي المرتب</th>
-                    <th class="hidden-xs">السنة</th>
-                    <th>الشهر</th>
+                    <th class="hidden-sm hidden-xs text-center animation-pullDown">العمل الإضافي</th>
+                    <th class="hidden-sm hidden-xs text-center animation-pullDown">الرعاية الصحية</th>
+                    <th class="hidden-sm hidden-xs text-center animation-pullDown">السلفة</th>
+                    <th class="text-center animation-pullDown">صافي المرتب</th>
+                    <th class="hidden-xs text-center animation-pullDown">السنة</th>
+                    <th class="text-center animation-pullDown">الشهر</th>
                 </tr>
             </thead>
             <tbody>
                 {% for salary in salarys %}
                 <tr>
                     <td class="text-center">
-                        <a href="{% url 'salary' salary.id %}">تفاصيل المرتب</a>
+                        <h4><a href="{% url 'salary' salary.id %}">تفاصيل المرتب</a></h4>
                     </td>
-                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
-                            class="label label-warning">{{salary.overtime}}</a>
+                    <td class="hidden-xs">
+                        <h3 class="text-success text-center animation-fadeIn">{{salary.overtime}}</h3>
                     </td>
-                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
-                            class="label label-warning">{{salary.health_care}}</a>
+                    <td class="hidden-xs">
+                        <h3 class="text-warning text-center animation-fadeIn">{{salary.health_care}}</h3>
                     </td>
-                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
-                            class="label label-warning">{{salary.solfa1}}</a>
+                    <td class="hidden-xs">
+                        <h3 class="text-danger text-center animation-fadeIn">{{salary.solfa1}}</h3>
                     </td>
-                    <td><a href="javascript:void(0)" class="label label-warning">{{salary.net_salary}}</a></td>
-                    <td class="hidden-xs">{{salary.sYear}}</td>
-                    <td><a href="{% url 'salary' salary.id %}">{{salary.sMonth}}</a></td>
+                    <!-- <h3 class="text-danger text-center animation-fadeIn">{{salary.solfa1}}</h3> -->
+                    <td>
+                        <h3 class="text-info text-center animation-fadeIn">{{salary.net_salary}}</h3>
+                    </td>
+                    <td class="hidden-xs text-center">
+                        <h3 class="text-center animation-fadeIn">{{salary.sYear}}</h3>
+                    </td>
+                    <td>
+                        <h3 class="text-center animation-fadeIn"><a
+                                href="{% url 'salary' salary.id %}">{{salary.sMonth}}</a></h3>
+                    </td>
                 </tr>
                 {% endfor %}
 
@@ -107,9 +115,9 @@
     </div>
     <!-- END Responsive Partial Block -->
     <div class="container text-center ">
-        <h2 class="text-success">إجمالي المرتبات {{total_salary}}</h2>
-        <h2 class="text-info">إجمالي خدمة الرعاية الصحية {{total_care}}</h2>
-        <h2 class="text-danger">إجمالي أقساط السلف المخصومة {{total_solf}}</h2>
+        <h2 class="text-success animation-pullUp">إجمالي المرتبات {{total_salary}}</h2>
+        <h2 class="text-info animation-pullUp">إجمالي خدمة الرعاية الصحية {{total_care}}</h2>
+        <h2 class="text-danger animation-pullUp">إجمالي أقساط السلف المخصومة {{total_solf}}</h2>
     </div>
 </div>
 <!-- END Page Content -->

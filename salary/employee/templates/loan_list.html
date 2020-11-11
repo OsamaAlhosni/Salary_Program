@@ -19,25 +19,29 @@
     <table class="table table-vcenter table-striped">
       <thead>
         <tr>
-          <th style="width: 150px;" class="text-center">عرض المزيد</th>
-          <th class="hidden-sm hidden-xs">العمل الإضافي</th>
-          <th class="hidden-sm hidden-xs">الرعاية الصحية</th>
-          <th class="hidden-sm hidden-xs">السلفة</th>
-          <th>صافي المرتب</th>
+          <!-- <th style="width: 150px;" class="text-center">عرض المزيد</th> -->
+          <th class="text-center animation-pullDown"> الإستقطاع الشهري</th>
+          <th class="text-center animation-pullDown">الرصيد المتبقي</th>
+          <th class="text-center animation-pullDown">قيمة السلفة</th>
+          <!-- <th>صافي المرتب</th>
           <th class="hidden-xs">السنة</th>
-          <th>الشهر</th>
+          <th>الشهر</th> -->
         </tr>
       </thead>
       <tbody>
         {% for loan in loan_list %}
         <tr>
-          <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">{{loan.loan}}</a>
+          <td>
+            <h3 class="text-danger text-center animation-fadeIn">{{loan.disc_amount}}</h3>
           </td>
-          <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">{{loan.balance}}</a>
+          <td>
+            <h3 class="text-success text-center animation-fadeIn">{{loan.balance}}</h3>
           </td>
-          <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
-              class="label label-warning">{{loan.disc_amount}}</a>
+
+          <td>
+            <h3 class="text-info text-center animation-fadeIn">{{loan.loan}}</h3>
           </td>
+
         </tr>
         {% endfor %}
 
