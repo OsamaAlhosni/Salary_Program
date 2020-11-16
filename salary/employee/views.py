@@ -130,7 +130,8 @@ def profile(request):
                 exits_profile.send_email = True
                 exits_profile.save()
             employee = Employee.objects.filter(user=request.user)
-            return render(request, 'profile.html', {'user': user, 'employee': employee, 'mangemnts': mangemnts, 'error': 'خطأ'})
+            # return render(request, 'profile.html', {'user': user, 'employee': employee, 'mangemnts': mangemnts, 'error': 'خطأ'})
+            return render(request, 'profile.html', {'user': user, 'employee': employee, 'mangemnts': mangemnts})
         else:
             mobile_no = request.POST['mobile-no']
             email = request.POST['email-input']
@@ -195,7 +196,7 @@ def views_salary(request):
     for total in salarys_list:
         total_salary += total.net_salary
         total_care += total.health_care
-        total_solf += total.solfa1
+        total_solf += (total.solfa1+total.solfa2)
     page = request.GET.get('page', 1)
 
     paginator = Paginator(salarys_list, 4)
@@ -227,3 +228,9 @@ def loan(request):
     loan_list = Loan.objects.filter(user=request.user)
 
     return render(request, 'loan_list.html', {'loan_list': loan_list})
+
+
+def health_care(request):
+    health_care = Salary.objects.filter(
+        user=request.user).order_by('-sMonth', '-sYear')
+    return render(request, 'health_care.html', {'health_care': health_care})

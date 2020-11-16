@@ -115,13 +115,15 @@
 
                         <!-- Theme Colors -->
                         <!-- Change Color Theme functionality can be found in js/app.js - templateOptions() -->
-                        <ul class="sidebar-section sidebar-themes clearfix sidebar-nav-mini-hide">
-                            <!-- You can also add the default color theme
-                                <li class="active">
-                                    <a href="javascript:void(0)" class="themed-background-dark-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default Blue"></a>
-                                </li>
-                                -->
-                        </ul>
+                        <!-- <ul class="sidebar-section sidebar-themes clearfix sidebar-nav-mini-hide">
+                            You can also add the default color theme
+                            <li class="active">
+                                <a href="javascript:void(0)"
+                                    class="themed-background-dark-default themed-border-default" data-theme="default"
+                                    data-toggle="tooltip" title="Default Blue"></a>
+                            </li>
+
+                        </ul> -->
                         <!-- END Theme Colors -->
 
                         <!-- Sidebar Navigation -->
@@ -162,22 +164,22 @@
                                 <i class="gi gi-settings"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-options">
-                                <li class="dropdown-header text-center">Header Style</li>
+                                <li class="dropdown-header text-center">ألوان الصفحة</li>
                                 <li>
                                     <div class="btn-group btn-group-justified btn-group-sm">
                                         <a href="javascript:void(0)" class="btn btn-primary"
-                                            id="options-header-default">Light</a>
+                                            id="options-header-default">فاتح</a>
                                         <a href="javascript:void(0)" class="btn btn-primary"
-                                            id="options-header-inverse">Dark</a>
+                                            id="options-header-inverse">مظلم</a>
                                     </div>
                                 </li>
-                                <li class="dropdown-header text-center">Page Style</li>
+                                <li class="dropdown-header text-center">شكل الصفحة</li>
                                 <li>
                                     <div class="btn-group btn-group-justified btn-group-sm">
                                         <a href="javascript:void(0)" class="btn btn-primary"
-                                            id="options-main-style">Default</a>
+                                            id="options-main-style">إفتراضي</a>
                                         <a href="javascript:void(0)" class="btn btn-primary"
-                                            id="options-main-style-alt">Alternative</a>
+                                            id="options-main-style-alt">بدون حدود</a>
                                     </div>
                                 </li>
                             </ul>
@@ -201,7 +203,7 @@
                                 <li class="dropdown-header text-center">حسابي</li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="page_ready_user_profile.html">
+                                    <a href="/profile">
                                         <i class="fa fa-user fa-fw pull-right"></i>
                                         البيانات الاساسية
                                     </a>
@@ -213,7 +215,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="page_ready_lock_screen.html"><i class="fa fa-lock fa-fw pull-right"></i>
+                                    <a href="#"><i class="fa fa-lock fa-fw pull-right"></i>
                                         قفل الحساب</a>
                                     <a href="javascript:{document.getElementById('logout').submit()}"><i
                                             class="fa fa-ban fa-fw pull-right"></i> تسجيل
@@ -255,77 +257,89 @@
     <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
     <div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header text-center">
-                    <h2 class="modal-title"><i class="fa fa-pencil"></i> إعدادات</h2>
-                </div>
-                <!-- END Modal Header -->
 
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <form action="index.html" method="post" enctype="multipart/form-data"
-                        class="form-horizontal form-bordered" onsubmit="return false;">
-                        <fieldset>
-                            <legend class="text-right">البيانات الاساسية</legend>
-                            <div class="form-group">
-                                <div class="col-md-8">
-                                    <p class="form-control-static text-right">علي عبدالحفيظ</p>
-                                </div>
-                                <label class="col-md-4 control-label text-right">الأسم</label>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-8">
-                                    <input type="email" id="user-settings-email text-right" name="user-settings-email"
-                                        class="form-control" value="admin@example.com">
-                                </div>
-                                <label class="col-md-4 control-label text-right" for="user-settings-email">البريد
-                                    الإلكتروني</label>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> إعدادات</h2>
+                    </div>
+                    <!-- END Modal Header -->
 
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="user-settings-notifications">استلام الاشعارات
-                                    بالبريد</label>
-                                <div class="col-md-8">
-                                    <label class="switch switch-primary">
-                                        <input type="checkbox" id="user-settings-notifications"
-                                            name="user-settings-notifications" value="1" checked>
-                                        <span></span>
-                                    </label>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form action="index.html" method="post" enctype="multipart/form-data"
+                            class="form-horizontal form-bordered" onsubmit="return false;">
+                            {% csrf_token %}
+                            <fieldset>
+                                <legend class="text-right">البيانات الاساسية</legend>
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <p class="form-control-static text-right">{{ user.get_short_name }}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label text-right">الأسم</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <input type="email" id="user-settings-email text-right"
+                                            name="user-settings-email" class="form-control" value="{{ user.email }}">
+                                    </div>
+                                    <label class="col-md-4 control-label text-right" for="user-settings-email">البريد
+                                        الإلكتروني</label>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">استلام
+                                        الاشعارات
+                                        بالبريد</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" id="user-settings-notifications"
+                                                name="user-settings-notifications" value="1" checked>
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend class="text-center text-danger"><i class="fa fa-key"></i> تحديث كلمة المرور
+                                </legend>
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <input type="password" id="user-settings-password" name="user-settings-password"
+                                            class="form-control" placeholder="الرجاء اختيار كلمة مرور قوية">
+                                    </div>
+                                    <label class="col-md-4 control-label" for="user-settings-password">كلمة المرور
+                                        الجديدة</label>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <input type="password" id="user-settings-repassword"
+                                            name="user-settings-repassword" class="form-control"
+                                            placeholder="تأكيد كلمة المرور">
+                                    </div>
+                                    <label class="col-md-4 control-label" for="user-settings-repassword">تأكيد كلمة
+                                        المرور
+                                        الجديدة</label>
+
+                                </div>
+                            </fieldset>
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button type="button" class="btn btn-sm btn-default"
+                                        data-dismiss="modal">خروج</button>
+                                    <button type="submit" class="btn btn-sm btn-primary">حفظ التغييرات</button>
                                 </div>
                             </div>
-                        </fieldset>
-                        <fieldset>
-                            <legend>تحديث كلمة المرور</legend>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="user-settings-password">كلمة المرور
-                                    الجديدة</label>
-                                <div class="col-md-8">
-                                    <input type="password" id="user-settings-password" name="user-settings-password"
-                                        class="form-control" placeholder="الرجاء اختيار كلمة مرور قوية">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="user-settings-repassword">تأكيد كلمة المرور
-                                    الجديدة</label>
-                                <div class="col-md-8">
-                                    <input type="password" id="user-settings-repassword" name="user-settings-repassword"
-                                        class="form-control" placeholder="تأكيد كلمة المرور">
-                                </div>
-                            </div>
-                        </fieldset>
-                        <div class="form-group form-actions">
-                            <div class="col-xs-12 text-right">
-                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">خروج</button>
-                                <button type="submit" class="btn btn-sm btn-primary">حفظ التغييرات</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->
                 </div>
-                <!-- END Modal Body -->
             </div>
         </div>
     </div>
+
     <!-- END User Settings -->
 
     <!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->

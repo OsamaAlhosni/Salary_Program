@@ -3,9 +3,7 @@
 
 
 {% block mainblock %}
-<!-- Page content -->
 <div id="page-content">
-    <!-- Table Responsive Header -->
     <div class="content-header">
         <div class="header-section">
             <h1 class="text-center" dir="rtl">
@@ -14,17 +12,10 @@
             </h1>
         </div>
     </div>
-    <!-- END Table Responsive Header -->
-
-    <!-- Responsive Partial Block -->
     <div class="block">
-        <!-- Responsive Partial Title -->
         <div>
             <h2 class="text-center text-success">كشف المرتبات</h2>
         </div>
-        <!-- END Responsive Partial Title -->
-
-        <!-- Responsive Partial Content -->
         <table class="table table-vcenter table-striped">
             <thead>
                 <tr>
@@ -50,9 +41,8 @@
                         <h3 class="text-warning text-center animation-fadeIn">{{salary.health_care}}</h3>
                     </td>
                     <td class="hidden-xs">
-                        <h3 class="text-danger text-center animation-fadeIn">{{salary.solfa1}}</h3>
+                        <h3 class="text-danger text-center animation-fadeIn">{{salary.solfa2}}</h3>
                     </td>
-                    <!-- <h3 class="text-danger text-center animation-fadeIn">{{salary.solfa1}}</h3> -->
                     <td>
                         <h3 class="text-info text-center animation-fadeIn">{{salary.net_salary}}</h3>
                     </td>
@@ -66,28 +56,6 @@
                 </tr>
                 {% endfor %}
 
-                <!-- <tr>
-                    <td class="text-center">
-                        <div class="btn-group btn-group-xs">
-                            <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-default"><i
-                                    class="fa fa-pencil"></i></a>
-                            <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i
-                                    class="fa fa-times"></i></a>
-                        </div>
-                    </td>
-                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">0.0</a>
-                    </td>
-                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">0.0</a>
-                    </td>
-                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)" class="label label-warning">450.000</a>
-                    </td>
-                    <td class="hidden-sm hidden-xs"><a href="javascript:void(0)"
-                            class="label label-warning">1735.395</a></td>
-                    <td class="hidden-xs">2020</td>
-                    <td><a href="page_ready_user_profile.html">8</a></td>
-                    <td class="text-center"><img src="{% static 'img/placeholders/avatars/avatar12.jpg' %}" alt="avatar"
-                            class="img-circle"></td>
-                </tr> -->
             </tbody>
         </table>
         {% if salarys.has_other_pages %}
@@ -111,15 +79,12 @@
             {% endif %}
         </ul>
         {% endif %}
-        <!-- END Responsive Partial Content -->
     </div>
-    <!-- END Responsive Partial Block -->
     <div class="container text-center ">
         <h2 class="text-success animation-pullUp">إجمالي المرتبات {{total_salary}}</h2>
         <h2 class="text-info animation-pullUp">إجمالي خدمة الرعاية الصحية {{total_care}}</h2>
         <h2 class="text-danger animation-pullUp">إجمالي أقساط السلف المخصومة {{total_solf}}</h2>
     </div>
 </div>
-<!-- END Page Content -->
 
 {% endblock mainblock %}

@@ -18,6 +18,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('loan/', views.loan, name='loan'),
     path('views_salary/', views.views_salary, name='views_salary'),
+    path('health_care/', views.health_care, name='health_care'),
     path('salary/<int:salary_pk>', views.salary, name='salary'),
     path('resultdata/', views.resultdata, name='resultdata'),
 
