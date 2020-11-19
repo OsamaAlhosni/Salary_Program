@@ -11,7 +11,7 @@
       <div class="header-section">
         <div class="row">
           <!-- Main Title (hidden on small devices for the statistics to fit) -->
-          <div class="col-md-4 col-lg-12 hidden-xs hidden-sm text-right">
+          <div class="col-md-4 col-lg-12 text-right">
             <h1>
               مرحبا
               <strong class="text-primary">{{ user.get_short_name }}</strong><br /><small>كيف حالك
@@ -27,7 +27,7 @@
     <div class="row">
       <div class="col-sm-6 col-lg-3">
         <!-- Widget -->
-        <a href="/health_care" class="widget widget-hover-effect1">
+        <a href="{% url 'health_care' %}" class="widget widget-hover-effect1">
           <div class="widget-simple">
             <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
               <i class="gi gi-heart_empty"></i>
@@ -40,7 +40,7 @@
         </a>
       </div>
       <div class="col-sm-6 col-lg-3">
-        <a href="/loan" class="widget widget-hover-effect1">
+        <a href="{% url 'loan' %}" class="widget widget-hover-effect1">
           <div class="widget-simple">
             <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
               <i class="gi gi-bank"></i>
@@ -53,7 +53,7 @@
         </a>
       </div>
       <div class="col-sm-6 col-lg-3">
-        <a href="/views_salary" class="widget widget-hover-effect1">
+        <a href="{% url 'views_salary' %}" class="widget widget-hover-effect1">
           <div class="widget-simple">
             <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
               <i class="gi gi-usd"></i>
@@ -66,7 +66,7 @@
         </a>
       </div>
       <div class="col-sm-6 col-lg-3">
-        <a href="/profile" class="widget widget-hover-effect1">
+        <a href="{% url 'profile' %}" class="widget widget-hover-effect1">
           <div class="widget-simple">
             <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
               <i class="fa fa-file-text"></i>
@@ -139,7 +139,7 @@
     <!-- END Widgets Row -->
   </div>
 
-  <canvas id="myChart" width="400" height="400"></canvas>
+  <!-- <canvas id="myChart" width="400" height="400"></canvas>
   <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -178,7 +178,7 @@
         }
       }
     });
-  </script>
+  </script> -->
   <!-- <script>
     var state = {
       'items': [],
