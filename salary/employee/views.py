@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import EmportEmployee, Salary, Employee, Mangement, Loan
@@ -231,6 +231,30 @@ def loan(request):
 
 
 def health_care(request):
-    health_care = Salary.objects.filter(
-        user=request.user).order_by('-sMonth', '-sYear')
-    return render(request, 'health_care.html', {'health_care': health_care})
+    salarys_list = Salary.objects.filter(
+        user=request.user).filter(health_care__gte=0).order_by('-sMonth', '-sYear')
+    total_care = 0
+    for total in salarys_list:
+        total_care += total.health_care
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(salarys_list, 4)
+    try:
+        salarys = paginator.page(page)
+    except PageNotAnInteger:
+        salarys = paginator.page(1)
+    except EmptyPage:
+        salarys = paginator.page(paginator.num_pages)
+
+    return render(request, 'health_care.html', {'salarys': salarys,  'total_care': total_care})
+
+    # health_care = Salary.objects.filter(
+    #     user=request.user).order_by('-sMonth', '-sYear')
+    # return render(request, 'health_care.html', {'health_care': health_care})
+
+
+def change_password(request):
+    # u = User.objects.get(username=request.user.username)
+    # u.set_password('newpass')
+    # u.save()
+    return render(request, 'change_password.html')

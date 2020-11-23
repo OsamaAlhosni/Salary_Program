@@ -7,8 +7,8 @@
   <div class="content-header">
     <div class="header-section">
       <h1 class="text-center" dir="rtl">
-        <i class="gi gi-money text-success"></i>كشف المرتبات<br><small>حركة جميع المرتبات التي تم
-          صرفها</small>
+        <i class="gi gi-money text-success"></i>الرعاية الصحية<br><small>حركة جميع مدفوعات الرعاية الصحية التي تم
+          صرفها </small>
       </h1>
     </div>
   </div>
@@ -19,71 +19,62 @@
     <table class="table table-vcenter table-striped">
       <thead>
         <tr>
-          <th style="width: 150px;" class="text-center">عرض المزيد</th>
-          <th class="hidden-sm hidden-xs text-center animation-pullDown">العمل الإضافي</th>
+          <!-- <th style="width: 150px;" class="text-center">عرض المزيد</th> -->
           <th class="hidden-sm hidden-xs text-center animation-pullDown">الرعاية الصحية</th>
-          <th class="hidden-sm hidden-xs text-center animation-pullDown">السلفة</th>
-          <th class="text-center animation-pullDown">صافي المرتب</th>
           <th class="hidden-xs text-center animation-pullDown">السنة</th>
           <th class="text-center animation-pullDown">الشهر</th>
         </tr>
       </thead>
       <tbody>
         {% for salary in salarys %}
+        {% if salary.health_care %}
         <tr>
-          <td class="text-center">
-            <h4><a href="{% url 'salary' salary.id %}">تفاصيل المرتب</a></h4>
+          <!-- <td class="text-center">
+            <h4><a href="{% url 'salary' salary.id %}">مدفوعات الرعاية الصحية</a></h4>
+          </td> -->
+
+          <td>
+            <h3 class="text-warning text-center animation-fadeIn">{{salary.health_care}}</h3>
           </td>
-          <td class="hidden-xs">
-            <h3 class="text-success text-center animation-fadeIn">{{health_care.overtime}}</h3>
-          </td>
-          <td class="hidden-xs">
-            <h3 class="text-warning text-center animation-fadeIn">{{health_care.health_care}}</h3>
-          </td>
-          <td class="hidden-xs">
-            <h3 class="text-danger text-center animation-fadeIn">{{health_care.solfa2}}</h3>
+          <td class=" text-center">
+            <h3 class="text-center animation-fadeIn">{{salary.sYear}}</h3>
           </td>
           <td>
-            <h3 class="text-info text-center animation-fadeIn">{{health_care.net_salary}}</h3>
-          </td>
-          <td class="hidden-xs text-center">
-            <h3 class="text-center animation-fadeIn">{{health_care.sYear}}</h3>
-          </td>
-          <td>
-            <h3 class="text-center animation-fadeIn"><a href="{% url 'salary' salary.id %}">{{health_care.sMonth}}</a>
+            <h3 class="text-center animation-fadeIn"><a href="{% url 'salary' salary.id %}">{{salary.sMonth}}</a>
             </h3>
           </td>
+          {% endif %}
         </tr>
         {% endfor %}
 
       </tbody>
     </table>
-    <!-- {% if salarys.has_other_pages %}
-        <ul class="pagination">
-            {% if salarys.has_previous %}
-            <li><a href="?page={{ salarys.previous_page_number }}">&laquo;</a></li>
-            {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
-            {% endif %}
-            {% for i in salarys.paginator.page_range %}
-            {% if salarys.number == i %}
-            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-            <li><a href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% if salarys.has_next %}
-            <li><a href="?page={{ salarys.next_page_number }}">&raquo;</a></li>
-            {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-            {% endif %}
-        </ul>
-        {% endif %} -->
+    {% if salarys.has_other_pages %}
+    <ul class="pagination">
+      {% if salarys.has_previous %}
+      <li><a href="?page={{ salarys.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in salarys.paginator.page_range %}
+      {% if salarys.number == i %}
+      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+      <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+      {% if salarys.has_next %}
+      <li><a href="?page={{ salarys.next_page_number }}">&raquo;</a></li>
+      {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+    {% endif %}
   </div>
   <div class="container text-center ">
-    <h2 class="text-success animation-pullUp">إجمالي المرتبات {{total_salary}}</h2>
-    <h2 class="text-info animation-pullUp">إجمالي خدمة الرعاية الصحية {{total_care}}</h2>
-    <h2 class="text-danger animation-pullUp">إجمالي أقساط السلف المخصومة {{total_solf}}</h2>
+    <!-- <h2 class="text-success animation-pullUp">إجمالي المرتبات {{total_salary}}</h2> -->
+    <h2 class="text-info animation-pullUp">إجمالي خدمة الرعاية الصحية <strong> {{total_care}}</strong></h2>
+    <!-- <h2 class="text-danger animation-pullUp">إجمالي أقساط السلف المخصومة {{total_solf}}</h2> -->
   </div>
 </div>
 

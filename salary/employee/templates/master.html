@@ -90,21 +90,15 @@
                             </div>
                             <div class="sidebar-user-name">{{ user.get_short_name }}</div>
                             <div class="sidebar-user-links">
-                                <a href="/pro" data-toggle="tooltip" data-placement="bottom" title="Profile"><i
-                                        class="gi gi-user"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Messages"><i
-                                        class="gi gi-envelope"></i></a>
-                                <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom"
-                                    title="Settings" onclick="$('#modal-user-settings').modal('show');"><i
-                                        class="gi gi-cogwheel"></i></a>
-                                <!-- <a href="#" onclick="$('#signOutBtn').click()" class="nav-link active ">تسجيل خروج</a>
-                                        <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
-                                            {% csrf_token %}
-                                            <button id="signOutBtn" type="submit">تسجيل خروج</button>
-                                        </form> -->
 
-                                <a href="#" onclick="$('#signOutBtn').click()" class="nav-link active ">تسجيل خروج</a>
+                                <a href="/pro" data-toggle="tooltip" data-placement="bottom"
+                                    title="البيانات الوظيفية"><i class="gi gi-user"></i></a>
+                                <a href="/changepass" class="enable-tooltip" data-placement="bottom" title="إعدادات"><i
+                                        class="gi gi-cogwheel"></i></a>
+
+                                <a href="#" class="enable-tooltip" data-placement="bottom" title="تسجيل الخروج"
+                                    onclick="$('#signOutBtn').click()" class="nav-link active "><i
+                                        class="gi gi-exit"></i></a>
                                 <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
                                     {% csrf_token %}
                                     <button id="signOutBtn" type="submit">تسجيل خروج</button>
@@ -112,19 +106,6 @@
                             </div>
                         </div>
                         <!-- END User Info -->
-
-                        <!-- Theme Colors -->
-                        <!-- Change Color Theme functionality can be found in js/app.js - templateOptions() -->
-                        <!-- <ul class="sidebar-section sidebar-themes clearfix sidebar-nav-mini-hide">
-                            You can also add the default color theme
-                            <li class="active">
-                                <a href="javascript:void(0)"
-                                    class="themed-background-dark-default themed-border-default" data-theme="default"
-                                    data-toggle="tooltip" title="Default Blue"></a>
-                            </li>
-
-                        </ul> -->
-                        <!-- END Theme Colors -->
 
                         <!-- Sidebar Navigation -->
                         <ul class="sidebar-nav">
@@ -200,6 +181,7 @@
                                     class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+
                                 <li class="dropdown-header text-center">حسابي</li>
                                 <li class="divider"></li>
                                 <li>
@@ -208,7 +190,7 @@
                                         البيانات الاساسية
                                     </a>
                                     <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                    <a href="#modal-user-settings" data-toggle="modal">
+                                    <a href="/changepass" data-toggle="modal">
                                         <i class="fa fa-cog fa-fw pull-right"></i>
                                         اعدادات الحساب
                                     </a>
@@ -254,104 +236,11 @@
     <!-- Scroll to top link, initialized in js/app.js - scrollToTop() -->
     <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
 
-    <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
-    <div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header text-center">
-                        <h2 class="modal-title"><i class="fa fa-pencil"></i> إعدادات</h2>
-                    </div>
-                    <!-- END Modal Header -->
-
-                    <!-- Modal Body -->
-                    <div class="modal-body">
-                        <form action="index.html" method="post" enctype="multipart/form-data"
-                            class="form-horizontal form-bordered" onsubmit="return false;">
-                            {% csrf_token %}
-                            <fieldset>
-                                <legend class="text-right">البيانات الاساسية</legend>
-                                <div class="form-group">
-                                    <div class="col-md-8">
-                                        <p class="form-control-static text-right">{{ user.get_short_name }}</p>
-                                    </div>
-                                    <label class="col-md-4 control-label text-right">الأسم</label>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-8">
-                                        <input type="email" id="user-settings-email text-right"
-                                            name="user-settings-email" class="form-control" value="{{ user.email }}">
-                                    </div>
-                                    <label class="col-md-4 control-label text-right" for="user-settings-email">البريد
-                                        الإلكتروني</label>
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="user-settings-notifications">استلام
-                                        الاشعارات
-                                        بالبريد</label>
-                                    <div class="col-md-8">
-                                        <label class="switch switch-primary">
-                                            <input type="checkbox" id="user-settings-notifications"
-                                                name="user-settings-notifications" value="1" checked>
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <legend class="text-center text-danger"><i class="fa fa-key"></i> تحديث كلمة المرور
-                                </legend>
-                                <div class="form-group">
-                                    <div class="col-md-8">
-                                        <input type="password" id="user-settings-password" name="user-settings-password"
-                                            class="form-control" placeholder="الرجاء اختيار كلمة مرور قوية">
-                                    </div>
-                                    <label class="col-md-4 control-label" for="user-settings-password">كلمة المرور
-                                        الجديدة</label>
-
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-8">
-                                        <input type="password" id="user-settings-repassword"
-                                            name="user-settings-repassword" class="form-control"
-                                            placeholder="تأكيد كلمة المرور">
-                                    </div>
-                                    <label class="col-md-4 control-label" for="user-settings-repassword">تأكيد كلمة
-                                        المرور
-                                        الجديدة</label>
-
-                                </div>
-                            </fieldset>
-                            <div class="form-group form-actions">
-                                <div class="col-xs-12 text-right">
-                                    <button type="button" class="btn btn-sm btn-default"
-                                        data-dismiss="modal">خروج</button>
-                                    <button type="submit" class="btn btn-sm btn-primary">حفظ التغييرات</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- END Modal Body -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- END User Settings -->
-
     <!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->
     <script src="{% static 'js/vendor/jquery.min.js' %}"></script>
     <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/plugins.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
-
-    <!-- Google Maps API Key (you will have to obtain a Google Maps API key to use Google Maps) -->
-    <!-- For more info please have a look at https://developers.google.com/maps/documentation/javascript/get-api-key#key -->
-    <script src="https://maps.googleapis.com/maps/api/js?key="></script>
-    <script src="{% static 'js/helpers/gmaps.min.js' %}"></script>
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'js/pages/index.js' %}"></script>

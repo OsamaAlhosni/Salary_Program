@@ -21,5 +21,6 @@ urlpatterns = [
     path('health_care/', views.health_care, name='health_care'),
     path('salary/<int:salary_pk>', views.salary, name='salary'),
     path('resultdata/', views.resultdata, name='resultdata'),
+    path('changepass/', views.change_password, name='change_password'),
 
 ]
